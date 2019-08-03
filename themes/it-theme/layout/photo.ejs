@@ -1,0 +1,17 @@
+<h1>你好 我是 photo!!!dddd</h1>
+
+<h2><%- page.title %></h2>
+<h2><%- page.date %></h2>
+
+
+<% if (site.pages.length) { %>
+  page !!!
+<% } %>
+
+<% if(page.author === 'Mike') { %>
+  Mike is the author
+<% } else { %>
+  sucks
+<% } %>
+
+<%- page.content %>

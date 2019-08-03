@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+  <%- css('css/style') %>
+</head>
+<body>
+  <%
+    let categories = {}
+    categories = theme.categories
+  %>
+
+  <div id="wrap" class="wrap">
+    <div class="sidebar">
+      <h1 class="sidebar__title">IT 技術筆記</h1>
+      <ul class="sidebar__list">
+        <% Object.keys(categories).forEach(function(category) { %>
+          <li class="sidebar__list__item">
+            <a href="/categories/<%- categories[category] %>"><%- categories[category] %></a>
+          </li>
+        <% }) %>
+        <!-- <a href="#" class="sidebar__list__item">
+          <li>HTML</li>
+        </a>
+        <a href="#" class="sidebar__list__item">
+          <li>CSS</li>
+        </a>
+        <a href="#" class="sidebar__list__item">
+          <li>JavaScript</li>
+        </a> -->
+      </ul>
+    </div>
+    <div class="content">
+      <div class="navbar">
+        <div id="hamburger_link" class="hamburger">
+          <span class="hamburger__bar"></span>
+          <span class="hamburger__bar"></span>
+          <span class="hamburger__bar"></span>
+        </div>
+      </div>
+      <div class="container">
+        <div class="content__category">分類 : HTML</div>
+        <div class="content__list">
+          <div class="content__list__item">
+            <a href="#" class="content__title">[App] Color Palette 簡單儲存搜尋色票匯出 SASS/SCSS</a>
+            <div class="content__date">2019/07/11</div>
+            <div class="content__detail">Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio sint id blanditiis explicabo nam inventore laborum nulla, quaerat quod sed! Perferendis facere atque dolorum quasi voluptates dolore est dolorem praesentium?</div>
+          </div>
+        </div>
+        <div class="page">
+          <div class="content__title">標題文字</div>
+          <div class="content__date">標題文字</div>
+          <div class="content__detail">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cupiditate minus ab neque inventore qui, itaque saepe aperiam quaerat sit obcaecati architecto, corporis consequuntur quod, consequatur doloribus in alias reiciendis. Repudiandae.</div>
+        </div>
+        <%- body %>
+      </div>
+    </div>
+  </div>
+
+  <!-- <%- partial('partial/header', {
+    title: 'Hello world'
+  }) %>
+  <br> -->
+
+  <%- js('js/toggle.js') %>
+</body>
+</html>

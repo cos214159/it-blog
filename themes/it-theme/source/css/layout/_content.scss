@@ -1,0 +1,45 @@
+
+// content
+.content {
+  
+  &__category {
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.16);
+    padding: 12px;
+    font-size: 18px;
+    margin-top: 2rem;
+  }
+
+  &__title {
+    font-size: 2rem;
+    text-decoration: none;
+    color: black;
+    line-height: 1.5;
+
+    &:hover, &:active {
+      color: rgba(0, 0, 0, 0.75);
+      text-decoration: underline;
+    }
+  }
+
+  &__date {
+    font-size: 16px;
+    margin-top: 1rem;
+    color: rgba(0, 0, 0, .6);
+  }
+
+  &__detail {
+    font-size: 20px;
+    color: #515151;
+    line-height: 1.5;
+    margin-top: 1rem;
+  }
+
+  &__list {
+    margin: 2rem 0;
+
+    &__item {
+      padding: 20px;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.16);
+    }
+  }
+}

@@ -1,0 +1,19 @@
+node_sass:
+  outputStyle: nested
+  precision: 5
+  sourceComments: false
+
+categories:
+  all: 所有文章
+  HTML: HTML
+  CSS: CSS
+  JavaScript: JavaScript
+
+menu:
+  home: / || home
+  #about: /about/ || user
+  #tags: /tags/ || tags
+  categories: /categories/ || th
+  #schedule: /schedule/ || calendar
+  #sitemap: /sitemap.xml || sitemap
+  #commonweal: /404/ || heartbeat
