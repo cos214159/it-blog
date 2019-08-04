@@ -1,0 +1,9 @@
+.post-list__item .card {
+  margin-bottom: 1rem; }
+  .post-list__item .card-header {
+    font-size: 1.2rem;
+    padding-bottom: 0px; }
+  .post-list__item .card__title {
+    color: #000; }
+    .post-list__item .card__title:hover, .post-list__item .card__title:active {
+      text-decoration: underline !important; }
