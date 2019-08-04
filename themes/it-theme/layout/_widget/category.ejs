@@ -1,0 +1,9 @@
+<% if(site.categories.length){ %>
+  <div class="widget">
+      <h3 class="title"><%= __('categories') %></h3>
+      <%- list_categories({
+        showcount: theme.cate_config.show_count,
+        show_current: theme.cate_config.show_current
+      }) %>
+  </div>
+<% } %>

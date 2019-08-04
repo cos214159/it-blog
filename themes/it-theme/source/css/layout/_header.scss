@@ -1,0 +1,16 @@
+.header {
+  background: white;
+  display: flex;
+
+  .header__navbar {
+    width: 100%;
+    max-width: 768px;
+    margin: 0 15px;
+  }
+
+  .header__logo {
+    color: black;
+    font-size: 2rem;
+  }
+
+}

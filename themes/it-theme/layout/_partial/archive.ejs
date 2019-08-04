@@ -1,0 +1,19 @@
+<% if (page.posts && page.posts.length) { %>
+  <ul class="post-list list-unstyled">
+    <% page.posts.forEach(function (post, i) { %>
+      <li class="post-list__item">
+        <div class="card">
+          <div class="card-header bg-white">
+            <a class="card__title text-decoration-none" href="<%- url_for(post.path) %>"><%- post.title %></a>
+            <%- partial('_partial/article-meta', {post: post, index: false}) %>
+          </div>
+          <div class="card-body">
+            <div class="card-body__content">
+                <%= truncate(strip_html(post.content), {length: theme.excerptLength || 120, separator: ''}) %>
+            </div>
+          </div>
+        </div>
+      </li>
+    <% }) %>
+  </ul>
+<% } %>

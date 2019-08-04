@@ -1,15 +1,21 @@
 @import "variables";
 
 // css reset
-@import "./reset";
-
+// @import "./reset";
+@import "../../../../node_modules/bootstrap/scss/bootstrap";
 
 @import "base";
 
+// helper
+@import "./helper/highlight";
+
 // layout
 @import "./layout/layout";
+@import "./layout/header";
 @import "./layout/sidebar";
 @import "./layout/content";
 
 // page
+@import "./page/index";
 @import "./page/page";
+
