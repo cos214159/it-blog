@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.9/styles/a11y-dark.min.css">
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<!--Title-->
+
+
+<title>TypeScript 系列筆記 (一) - 什麼是 TypeScript | IT 技術文章</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="IT 技術文章" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.ico">
+
+<link rel="stylesheet" href="../../../../css/style.css">
+</head>
+<body>
+  <div id="wrap" class="wrap">
+    <div class="header">
+  <div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white ">
+      <a class="navbar-brand" href="../../../../index.html">IT 技術筆記</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    
+    </nav>
+  </div>
+    
+  <!-- <h1 class="header__logo">
+    <a href="../../../../index.html">IT 技術筆記</a>
+  </h1>
+  <ul class="header__list">
+    <li class="header__list__item">123</li>
+    <li class="header__list__item">456</li>
+    <li class="header__list__item">789</li>
+  </ul> -->
+</div>
+    <div class="container content">
+      <div class="row">
+        <div class="col-md-8  col-md-12 ">
+          <article class="post">
+    <h1 class="post__head">
+        <div class="post__head__title">TypeScript 系列筆記 (一) - 什麼是 TypeScript</div>
+        <div class="post-meta">
+    <div class="post-meta__tags">
+        
+            <a class="tag-link" href="../../../../tags/TypeScript/">TypeScript</a>
+        
+    </div>
+    <span class="post-meta__tags">
+        建立日期 : 2019/08/04
+    </span>
+</div>
+    </h1>
+    <div class="post__body">
+        <p>我們都知道 JavaScript 是一個腳本語言，最初是運行在瀏覽器上，可以能動態更新畫面內容，讓使用者可以和畫面有更多的互動，但是因為一開始 JavaScript 撰寫的時間不是很長，在後來的新版本 ES6 有解決了一些問題，比方說 <code>hoisting</code>。</p>
+<p>而其中 JavaScript 的<code>動態型別</code>就是導致 TypeScript 產生的原因，原先我一開始學的程式語言是 C 以及 Java，這些程式語言都是強型別的語言，在一開始宣告變數時，必須要指定變數的型別，而假如本來是用整數宣告的變數被賦予一個字串的話，在編譯階段就會出錯，而 JavaScript 動態型別則是在執行階段，會動態更動變數型別。</p>
+<p>而就我個人的看法，動態型別在自己開發上其實也不是什麼大不了的事情，比方說在執行以下的 function 時，一定會知道這個 function 接受兩個數字型別去進行相加回傳，但是假如是給別人使用的話，別人可能會傳 <code>sum(&#39;2&#39;, &#39;3&#39;)</code>，雖然說一樣可以得到回傳的結果，但是不會是預期的，這個時候我們還會需要去看一下裡面的原始碼才知道說原來我們是要傳數字進去。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum</span>(<span class="params">a, b</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> a + b;</span><br><span class="line">&#125;</span><br><span class="line">sum(<span class="number">1</span>, <span class="number">2</span>) <span class="comment">// 3 (正確)</span></span><br><span class="line">sum(<span class="string">'2'</span>, <span class="string">'3'</span>) <span class="comment">// 23 (錯誤)</span></span><br></pre></td></tr></table></figure>
+
+<p>而 TypeScript 可以在編譯階段幫我們檢查傳入的變數型別是否有符合預期，而上面的寫法要改成</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum</span>(<span class="params">a: number, b: number</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> a + b;</span><br><span class="line">&#125;</span><br><span class="line">sum(<span class="number">1</span>, <span class="number">2</span>) <span class="comment">// 3 (正確)</span></span><br></pre></td></tr></table></figure>
+
+<p>我們會在 function 的參數旁邊註記型別，這樣 TypeScript 就會幫我們檢查，但這種語法必須依賴相對應的編譯工具編譯為 JavaScript 才可以在瀏覽器上運行，就跟 Sass 一樣，那至於編譯工具要怎麼安裝，就在後續的文章中會有提到。</p>
+
+    </div>
+    <div class="post__footer">
+        <div id="disqus_thread"></div>
+            <script>
+                /**
+                *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+                /*
+                var disqus_config = function () {
+                this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+                this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                };
+                */
+                (function() { // DON'T EDIT BELOW THIS LINE
+                var d = document, s = d.createElement('script');
+                s.src = 'https://it-blog-6.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+                })();
+                </script>
+                <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>                   
+        </div>
+</article>
+        </div>
+        
+  <aside class="col-md-4 sidebar">
+      
+      
+  <div class="widget">
+      <h3 class="title">目錄</h3>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link current" href="../../../../categories/前端/">前端</a><span class="category-list-count">2</span></li></ul>
+  </div>
+
+
+      
+      
+<div class="widget">
+    <h3 class="title">文章</h3>
+    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../../../../archives/2019/08/">2019年08月</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../../../archives/2019/07/">2019年07月</a><span class="archive-list-count">1</span></li></ul>
+</div>
+
+
+      
+      
+  <div class="widget">
+    <h3 class="title">標籤列表</h3>
+    <div class="content tag-cloud">
+        
+            <a href="../../../../tags/CSS/" style="font-size: 10px;">CSS</a> <a href="../../../../tags/HTML/" style="font-size: 10px;">HTML</a> <a href="../../../../tags/TypeScript/" style="font-size: 10px;">TypeScript</a>
+        
+    </div>
+  </div>
+
+
+      
+  </aside>
+
+      </div>
+    </div>
+    <div class="footer">
+        © 2019. All rights reserved.
+      </div>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.9/highlight.min.js"></script>
+  <script>
+      hljs.initHighlightingOnLoad();
+  </script>
+</body>
+</html>
