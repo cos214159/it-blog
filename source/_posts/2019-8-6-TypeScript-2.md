@@ -10,7 +10,7 @@ categories: 前端
 ## 安裝 TypeScript
 首先先使用 NPM 將 TypeScript 編譯工具安裝到全域環境下
 
-``` JavaScript
+``` 
 npm install -g typescript
 ```
 
@@ -54,8 +54,14 @@ alert(sum(1, 2));
 剛剛使用 tsc 去編譯檔案，如果檔案有非常多個的話，要用 tsc 一個一個去指定 `.ts` 檔進行編譯，如果要比較方便的話，可以產生一個設定檔，之後可以利用 `tsc` 指令去編譯專案底下所有的 `.ts` 檔案。
 
 ### 產生 tsconfig.json
-首先我們先建立設定檔，要建立設定檔也很簡單，只要打以下指令
+首先我們先建立設定檔，要建立設定檔也很簡單，只要打以下指令就可以幫我們建立一個 `tsconfig.json` 檔。
 
 ![建立 TypeScript 設定檔](https://firebasestorage.googleapis.com/v0/b/it-blog-a274d.appspot.com/o/tsc%20--init.PNG?alt=media&token=4454b94c-5dfa-429d-9ba4-3e28333beca8)
 
-就可以幫我們建立一個 `tsconfig.json` 檔，
+### 執行 tsc 指令
+接下來我們只需要執行以下指令，在專案目錄下所有的 `.ts` 檔都會被編譯成 JavaScript 的檔案。
+``` hash
+tsc
+```
+![tsc 編譯結果](https://firebasestorage.googleapis.com/v0/b/it-blog-a274d.appspot.com/o/ts%20%E7%B7%A8%E8%AD%AF.PNG?alt=media&token=54a295d1-e855-48c7-bd27-3d4ce131cb5d)
+
