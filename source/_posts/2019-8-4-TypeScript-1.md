@@ -1,7 +1,9 @@
 ---
 title: TypeScript 系列筆記 (一) - 什麼是 TypeScript
 date: 2019-08-04
-tags: TypeScript
+tags: 
+  - TypeScript
+  - JavaScript
 categories: 
   - 前端
 ---

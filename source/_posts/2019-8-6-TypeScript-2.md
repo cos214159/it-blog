@@ -1,7 +1,9 @@
 ---
 title: TypeScript 系列筆記 (二) - TypeScript 基本環境
-date: 2019-08-06
-tags: TypeScript
+date: 2019-08-06 00:52:37
+tags: 
+  - TypeScript
+  - JavaScript
 categories: 前端
 ---
 
