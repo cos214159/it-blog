@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.9/styles/a11y-dark.min.css">
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<!--Title-->
+
+
+<title>TypeScript 系列筆記 (三) - TypeScript 各種型別 | IT 技術文章</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="IT 技術文章" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.ico">
+
+<link rel="stylesheet" href="../../../../css/style.css">
+</head>
+<body>
+  <div id="wrap" class="wrap">
+    <div class="header">
+  <div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white ">
+      <a class="navbar-brand" href="../../../../index.html">IT 技術筆記</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    
+    </nav>
+  </div>
+    
+  <!-- <h1 class="header__logo">
+    <a href="../../../../index.html">IT 技術筆記</a>
+  </h1>
+  <ul class="header__list">
+    <li class="header__list__item">123</li>
+    <li class="header__list__item">456</li>
+    <li class="header__list__item">789</li>
+  </ul> -->
+</div>
+    <div class="container content">
+      <div class="row justify-content-center">
+        <div class="col-md-8  col-md-10 ">
+          <article class="post">
+    <h1 class="post__head">
+        <div class="post__head__title">TypeScript 系列筆記 (三) - TypeScript 各種型別</div>
+        <div class="post-meta">
+    <div class="post-meta__tags">
+        
+            <a class="tag-link" href="../../../../tags/JavaScript/">JavaScript</a> <a class="tag-link" href="../../../../tags/TypeScript/">TypeScript</a>
+        
+    </div>
+    <span class="post-meta__tags">
+        建立日期 : 2019/08/06
+    </span>
+</div>
+    </h1>
+    <div class="post__body">
+        <p>那麼可以來進入到 TypeScript 的撰寫方式了，回顧一下之前講的，TypeScript 會出現是因為 JavaScript 的動態型別，我們不希望在指定一個整數給變數之後，又可以將字串指派給該變數，TypeScript 可以在編譯階段抓出這個寫法並提示這不合法。</p>
+<h2 id="指派不一樣的型別給同一個變數"><a href="#指派不一樣的型別給同一個變數" class="headerlink" title="指派不一樣的型別給同一個變數"></a>指派不一樣的型別給同一個變數</h2><p>用以下程式碼當作範例</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="number">10</span>;</span><br><span class="line">a = <span class="string">'Hello World'</span>;</span><br></pre></td></tr></table></figure>
+
+<p>首先先指派整數 10 給變數 a，然後再把一個字串指派給 a 之後再進行編譯，這個時候就會出錯。</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/it-blog-a274d.appspot.com/o/tsc%20error.PNG?alt=media&token=6a3ff377-f726-481c-bd9c-4e74665779b1" alt="TypeScript 編譯錯誤"></p>
+<h2 id="TypeScript-針對各個型別的檢查"><a href="#TypeScript-針對各個型別的檢查" class="headerlink" title="TypeScript 針對各個型別的檢查"></a>TypeScript 針對各個型別的檢查</h2><h3 id="字串型別"><a href="#字串型別" class="headerlink" title="字串型別"></a>字串型別</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> name = <span class="string">'Tom'</span>;</span><br><span class="line">name = <span class="number">123</span>; <span class="comment">// error !</span></span><br></pre></td></tr></table></figure>
+
+<p>像這個例子就會有錯誤，因為我們把數字指派給一個存有字串的變數。</p>
+<h3 id="數字型別"><a href="#數字型別" class="headerlink" title="數字型別"></a>數字型別</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="number">10</span>;</span><br><span class="line">a = <span class="number">1.1</span>;</span><br></pre></td></tr></table></figure>
+
+<p>TypeScript 他不會特別區分整數和浮點數，因此上面這個設定是合法的。</p>
+<h3 id="Boolean"><a href="#Boolean" class="headerlink" title="Boolean"></a>Boolean</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="literal">true</span>;</span><br><span class="line">a = <span class="literal">false</span>; <span class="comment">// 正確  </span></span><br><span class="line">a = <span class="number">1</span>; <span class="comment">// 錯誤</span></span><br></pre></td></tr></table></figure>
+
+<p>布林在撰寫的時候要注意，當一開始把 Boolean 指派給變數之後，再把數字指派給他在 TypeScript 編譯時是不合法的。</p>
+<h3 id="Arrays"><a href="#Arrays" class="headerlink" title="Arrays"></a>Arrays</h3><p>陣列在 TypeScript 的檢查方式有點不一樣</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line">a = [<span class="number">4</span>, <span class="number">5</span>]; <span class="comment">// 正確</span></span><br><span class="line">a = [<span class="string">'1'</span>, <span class="string">'2'</span>] <span class="comment">// 錯誤</span></span><br></pre></td></tr></table></figure>
+
+<p>以這個例子來說，TypeScript 編譯時會出現錯誤，而錯誤的原因是因為在一開始把一個陣列的值都設定成整數，而這個時候 TypeScript 會將這個陣列視為整數陣列，假如我們之後把一個字串陣列指派給 a 的話編譯時會出錯，但假使真的想要指派任意型別給變數的話，後面會介紹 <code>any</code> 就是把這個變數指定為任意型別。</p>
+<p>但是假如一開始把陣列裡面的元素都是不同型別的話，那就相當於是 <code>任意型別</code>，之後重新指派新的陣列時，就不用符合原先的型別順序，如以下範例。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [<span class="number">1</span>, <span class="string">'Hello World'</span>, <span class="literal">true</span>];</span><br><span class="line">arr = [<span class="string">"Hello World"</span>, <span class="literal">false</span>, <span class="number">20</span>]; <span class="comment">// 正確</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="any-任意型別"><a href="#any-任意型別" class="headerlink" title="any 任意型別"></a>any 任意型別</h3><p>假如我們想要賦予一個變數任意型別的值，可以使用任意型別，用法也很簡單</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> test: any = <span class="number">1</span>;</span><br><span class="line">test = <span class="string">'Hello World'</span>; <span class="comment">// 正確</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> arr: any[] = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line">arr = [<span class="string">'1'</span>, <span class="string">'2'</span>, <span class="string">'3'</span>]; <span class="comment">// 正確</span></span><br></pre></td></tr></table></figure>
+
+<p>之前的陣列範例，當一個陣列的值型都一樣時，之後如果去指派一個字串陣列那編譯後會出錯，但是假如是想要做這個事情的話，只要在後面指定他是一個任意型別的陣列就可以 <code>any[]</code>。</p>
+<h3 id="明確指定變數型別"><a href="#明確指定變數型別" class="headerlink" title="明確指定變數型別"></a>明確指定變數型別</h3><p>如果有學過 Java 或 C 的話，在宣告變數時，會有一些型別關鍵字，像</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a;</span><br><span class="line"><span class="keyword">char</span> b;</span><br><span class="line"><span class="keyword">double</span> c;</span><br></pre></td></tr></table></figure>
+
+<p>而在 TypeScript 也可以在宣告變數時明確指定該變數的型別，宣告的方式如下</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a: number = <span class="number">1</span>;</span><br><span class="line">a = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> str: string = <span class="string">'Hello World'</span>;</span><br><span class="line">str = <span class="string">'test'</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="tuple-數組"><a href="#tuple-數組" class="headerlink" title="tuple 數組"></a>tuple 數組</h3><p>這個蠻特別的，之前所講的陣列，假如說是這樣寫並不會出錯，原因是陣列裡面所存的值型別並不相同。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [<span class="number">1</span>, <span class="string">'Hello World'</span>, <span class="literal">true</span>];</span><br><span class="line">arr = [<span class="string">"Hello World"</span>, <span class="literal">false</span>, <span class="number">20</span>]; <span class="comment">// 正確</span></span><br></pre></td></tr></table></figure>
+
+<p>但是假如我們會想要讓後續在指派新的陣列時，也要依照一開始所定義的型別順序的話，就可以在為每一個元素指定型別，範例如下</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr: [number, string, boolean] = [<span class="number">1</span>, <span class="string">'Hello World'</span>, <span class="literal">true</span>];</span><br><span class="line">arr = [<span class="string">"Hello World"</span>, <span class="literal">false</span>, <span class="number">20</span>]; <span class="comment">// 編譯錯誤</span></span><br></pre></td></tr></table></figure>
+
+<p>這樣寫的話編譯時就會發生錯誤，原因就是因為新的陣列的值型別順序並沒有依照一開始給定的 <code>[number, string, boolean]</code> 去做排列。</p>
+<h3 id="列舉-enum"><a href="#列舉-enum" class="headerlink" title="列舉 (enum)"></a>列舉 (enum)</h3><p>列舉在像 C、C# 或是 Java 都有這樣的用法，而 TypeScript 提供這樣的語法特性可以讓我們使用。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">enum Week &#123;</span><br><span class="line">  Monday,</span><br><span class="line">  Tuesday,</span><br><span class="line">  Wednesday,</span><br><span class="line">  Thursday,</span><br><span class="line">  Friday,</span><br><span class="line">  Saturday,</span><br><span class="line">  Sunday</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> day: Week = Week.Monday; <span class="comment">// 0</span></span><br></pre></td></tr></table></figure>
+
+<p>用法上每一個列舉的項目的第一個值是從 0 開始，往後依序加一遞增，從 Monday 到 Sunday 的值依序為 0 ~ 6，但我們也可以改變這個數值順序</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">enum Week &#123;</span><br><span class="line">  Monday = <span class="number">1</span>,</span><br><span class="line">  Tuesday,</span><br><span class="line">  Wednesday,</span><br><span class="line">  Thursday = <span class="number">10</span>,</span><br><span class="line">  Friday,</span><br><span class="line">  Saturday,</span><br><span class="line">  Sunday</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> Monday: Week = Week.Monday; <span class="comment">// 1</span></span><br><span class="line"><span class="keyword">let</span> Tuesday: Week = Week.Tuesday; <span class="comment">// 2</span></span><br><span class="line"><span class="keyword">let</span> Wednesday: Week = Week.Wednesday; <span class="comment">// 3</span></span><br><span class="line"><span class="keyword">let</span> Thursday: Week = Week.Thursday; <span class="comment">// 10</span></span><br><span class="line"><span class="keyword">let</span> Friday: Week = Week.Friday; <span class="comment">// 11</span></span><br><span class="line"><span class="keyword">let</span> Saturday: Week = Week.Saturday; <span class="comment">// 12</span></span><br><span class="line"><span class="keyword">let</span> Sunday: Week = Week.Sunday; <span class="comment">// 13</span></span><br></pre></td></tr></table></figure>
+
+<p>這樣的編排順序只要其中一個列舉的值是有經過指定的，那之後就會從這個指定的值往上遞增。</p>
+
+    </div>
+    <div class="post__footer">
+        <div id="disqus_thread"></div>
+            <script>
+                /**
+                *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+                /*
+                var disqus_config = function () {
+                this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+                this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                };
+                */
+                (function() { // DON'T EDIT BELOW THIS LINE
+                var d = document, s = d.createElement('script');
+                s.src = 'https://it-blog-6.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+                })();
+                </script>
+                <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>                   
+        </div>
+</article>
+        </div>
+        
+      </div>
+    </div>
+    <div class="footer">
+        © 2019. All rights reserved.
+      </div>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.9/highlight.min.js"></script>
+  <script>
+      hljs.initHighlightingOnLoad();
+  </script>
+</body>
+</html>
