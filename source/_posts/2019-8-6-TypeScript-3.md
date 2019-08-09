@@ -83,8 +83,67 @@ char b;
 double c;
 ```
 
-而在 TypeScript 也可以在宣告變數時明確指定該變數的型別
+而在 TypeScript 也可以在宣告變數時明確指定該變數的型別，宣告的方式如下
+``` JavaScript
+let a: number = 1;
+a = 10;
 
+let str: string = 'Hello World';
+str = 'test'
+```
 
+### tuple 數組
+這個蠻特別的，之前所講的陣列，假如說是這樣寫並不會出錯，原因是陣列裡面所存的值型別並不相同。
+``` JavaScript
+let arr = [1, 'Hello World', true];
+arr = ["Hello World", false, 20]; // 正確
+```
 
+但是假如我們會想要讓後續在指派新的陣列時，也要依照一開始所定義的型別順序的話，就可以在為每一個元素指定型別，範例如下
 
+``` JavaScript
+let arr: [number, string, boolean] = [1, 'Hello World', true];
+arr = ["Hello World", false, 20]; // 編譯錯誤
+```
+
+這樣寫的話編譯時就會發生錯誤，原因就是因為新的陣列的值型別順序並沒有依照一開始給定的 `[number, string, boolean]` 去做排列。
+
+### 列舉 (enum)
+列舉在像 C、C# 或是 Java 都有這樣的用法，而 TypeScript 提供這樣的語法特性可以讓我們使用。
+
+``` JavaScript
+enum Week {
+  Monday,
+  Tuesday,
+  Wednesday,
+  Thursday,
+  Friday,
+  Saturday,
+  Sunday
+}
+
+let day: Week = Week.Monday; // 0
+```
+
+用法上每一個列舉的項目的第一個值是從 0 開始，往後依序加一遞增，從 Monday 到 Sunday 的值依序為 0 ~ 6，但我們也可以改變這個數值順序
+
+``` JavaScript
+enum Week {
+  Monday = 1,
+  Tuesday,
+  Wednesday,
+  Thursday = 10,
+  Friday,
+  Saturday,
+  Sunday
+}
+let Monday: Week = Week.Monday; // 1
+let Tuesday: Week = Week.Tuesday; // 2
+let Wednesday: Week = Week.Wednesday; // 3
+let Thursday: Week = Week.Thursday; // 10
+let Friday: Week = Week.Friday; // 11
+let Saturday: Week = Week.Saturday; // 12
+let Sunday: Week = Week.Sunday; // 13
+```
+
+這樣的編排順序只要其中一個列舉的值是有經過指定的，那之後就會從這個指定的值往上遞增。
