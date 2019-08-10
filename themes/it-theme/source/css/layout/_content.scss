@@ -43,3 +43,31 @@
     }
   }
 }
+
+#page-nav {
+  display: flex;
+  margin-bottom: 1rem;
+
+  > * {
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #d2d2d2;
+    text-decoration: none !important;
+    background: white;
+    margin-left: -1px;
+  }
+
+  &:first-child {
+    border-top-left-radius: .25rem;
+    border-bottom-left-radius: .25rem;
+  }
+
+  &:last-child {
+    border-top-right-radius: .25rem;
+    border-bottom-right-radius: .25rem
+  }
+
+  .current {
+    
+  }
+
+}

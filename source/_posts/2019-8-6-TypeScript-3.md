@@ -127,7 +127,7 @@ let day: Week = Week.Monday; // 0
 
 用法上每一個列舉的項目的第一個值是從 0 開始，往後依序加一遞增，從 Monday 到 Sunday 的值依序為 0 ~ 6，但我們也可以改變這個數值順序
 
-``` JavaScript
+``` TypeScript
 enum Week {
   Monday = 1,
   Tuesday,
@@ -147,3 +147,56 @@ let Sunday: Week = Week.Sunday; // 13
 ```
 
 這樣的編排順序只要其中一個列舉的值是有經過指定的，那之後就會從這個指定的值往上遞增。
+
+### union type 聯合類型
+假如一個變數我們想要讓他可以接受多個型別的值，可以使用 union type
+
+``` JavaScript
+let test: number | string = '123';
+test = 123; // 正確
+test = true // 錯誤
+```
+
+如以上範例，test 在宣告時使用聯合型別讓他可以接受數字和字串的值，但是這兩個型別以外的值沒有辦法通過編譯。
+
+### never type
+這個型別代表
+  * 沒有被賦予任何值的變數
+  * 會拋出異常不會有返回值的函數
+ 
+``` JavaScript
+let a: never;
+
+function error(message: string): never {
+  throw new Error(message);
+}
+```
+
+如以上範例，變數 `a` 並沒有被賦予任何值，這個時候將型別註記為 never 是可以的，而 function error 內部有拋出例外，所以這個 function 不會有回傳值，那他也是可以註記為 never 型別
+
+### null type
+這個是在 TypeScript 2.0 提供的型別，在之前我們使用以下語法會是正確的
+
+``` JavaScript
+let a = 10;
+a = null;
+```
+
+在 2.0 提供一個設定，只要在 `tsconfig.json` 打開這個設定 `"strictNullChecks": true,  `，就可以增加 null 的檢查，會在編譯時把 null 當成一個獨立的型別看待，這個時候再執行上面的程式會錯誤，因為不可以把 null 指派給存有數字型別的變數，如果想要讓編譯時通過那可以使用聯合型別。
+
+``` JavaScript
+let a: number | null = 10;
+a = null; // 正確
+```
+
+有趣的是如果沒有增加這個設定 `"strictNullChecks": true,`，null 會被當成一個任意型別，假如一開始指派 null 給 a 的話，那 a 還是可以被指派為任何型別的值
+
+``` JavaScript
+let a = null;
+a = 10; // 正確
+a = '10' // 正確
+a = function hello() { // 正確
+  return 'hello world'
+}
+```
+
