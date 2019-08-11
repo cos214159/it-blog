@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.9/styles/a11y-dark.min.css">
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<!--Title-->
+
+
+<title>TypeScript 系列筆記 (七) - TypeScript 和 ES6 | IT 技術文章</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="IT 技術文章" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.ico">
+
+<link rel="stylesheet" href="../../../../css/style.css">
+</head>
+<body>
+  <div id="wrap" class="wrap">
+    <div class="header">
+  <div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white ">
+      <a class="navbar-brand" href="../../../../index.html">IT 技術筆記</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    
+    </nav>
+  </div>
+    
+  <!-- <h1 class="header__logo">
+    <a href="../../../../index.html">IT 技術筆記</a>
+  </h1>
+  <ul class="header__list">
+    <li class="header__list__item">123</li>
+    <li class="header__list__item">456</li>
+    <li class="header__list__item">789</li>
+  </ul> -->
+</div>
+    <div class="container content">
+      <div class="row justify-content-center">
+        <div class="col-md-8  col-md-10 ">
+          <article class="post">
+    <h1 class="post__head">
+        <div class="post__head__title">TypeScript 系列筆記 (七) - TypeScript 和 ES6</div>
+        <div class="post-meta">
+    <div class="post-meta__tags">
+        
+            <a class="tag-link" href="../../../../tags/JavaScript/">JavaScript</a> <a class="tag-link" href="../../../../tags/TypeScript/">TypeScript</a>
+        
+    </div>
+    <span class="post-meta__tags">
+        建立日期 : 2019/08/11
+    </span>
+</div>
+    </h1>
+    <div class="post__body">
+        <p>TypeScript 可以讓我們撰寫強型別的變數並且在編譯階段檢查型別是否正確，而 TypeScript 因為是 ES6 的超級 (superset)，他也可以幫我們編譯 ES6 的語法。</p>
+<h2 id="ES6-語法"><a href="#ES6-語法" class="headerlink" title="ES6 語法"></a>ES6 語法</h2><h3 id="let-amp-const"><a href="#let-amp-const" class="headerlink" title="let &amp; const"></a>let &amp; const</h3><p>在 ES6 裡面定義變數的關鍵字從 ES5 的 <code>var</code> 變成 <code>let</code> 和 <code>const</code>，而他們的差別在於作用域的不同，<code>var</code> 屬於 function scope 而 <code>let</code> 和 <code>const</code> 屬於 block scope，這個語法可以撰寫在 TypeScript 裡面，而編譯時會自動幫我們轉成 ES5 的語法，比方說以下範例在編譯時會出錯</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="keyword">let</span> a = <span class="number">10</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(a); <span class="comment">// Cannot find name 'a'.</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://firebasestorage.googleapis.com/v0/b/it-blog-a274d.appspot.com/o/ES6%20let%20const.PNG?alt=media&token=7f83a4a1-c2fd-4b9f-83ec-53d150662a76" alt="let &amp; const 編譯錯誤"></p>
+<p>而編譯成功之後就跟使用 babel 幫我們編譯的結果是一樣的，以下為合法的程式碼</p>
+<p>—-&gt; 編譯前</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> str = <span class="string">'123'</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">hello</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> str = <span class="string">'hello'</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">hello();</span><br><span class="line"><span class="built_in">console</span>.log(str)</span><br></pre></td></tr></table></figure>
+
+<p>—-&gt; 編譯後</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">"use strict"</span>;</span><br><span class="line"><span class="keyword">var</span> str = <span class="string">'123'</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">hello</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> str = <span class="string">'hello'</span>;</span><br><span class="line">&#125;</span><br><span class="line">hello();</span><br><span class="line"><span class="built_in">console</span>.log(str);</span><br></pre></td></tr></table></figure>
+
+<h3 id="arrow-function"><a href="#arrow-function" class="headerlink" title="arrow function"></a>arrow function</h3><p>箭頭函式是 ES6 的新語法，而與 ES5 的最大不同就是 <code>this</code> 指向的位置不同，詳細的內容網路上有很多文章可以參閱。</p>
+<p>—-&gt; 編譯前</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> hello = <span class="function">(<span class="params">name: string</span>) =&gt;</span> <span class="string">'hello'</span> + name;</span><br><span class="line">hello(<span class="string">'JACK'</span>);</span><br></pre></td></tr></table></figure>
+
+<p>—–&gt; 編譯後</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">"use strict"</span>;</span><br><span class="line"><span class="keyword">var</span> hello = <span class="function"><span class="keyword">function</span> (<span class="params">name</span>) </span>&#123; <span class="keyword">return</span> <span class="string">'hello'</span> + name; &#125;;</span><br><span class="line">hello(<span class="string">'JACK'</span>);</span><br></pre></td></tr></table></figure>
+
+<p>可以看到箭頭函式被編譯成了傳統函式了。</p>
+<h3 id="函式預設參數-default-parameter"><a href="#函式預設參數-default-parameter" class="headerlink" title="函式預設參數 (default parameter)"></a>函式預設參數 (default parameter)</h3><p>函式預設參數 允許沒有值傳入或是傳入值為 undefined 的情況下，參數能以指定的預設值初始化。<br>以下範例在 function 的參數註記型別之後，可以再直接指派一個預設值，這是當呼叫此 function 的時候如果沒有帶參數那就會使用這個預設值。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> greeting = <span class="function">(<span class="params">name: string = <span class="string">'JAMES'</span></span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">'hello '</span> + name</span><br><span class="line">&#125;</span><br><span class="line">greeting();</span><br></pre></td></tr></table></figure>
+
+<h3 id="展開運算子-spread-operator-與-其餘運算子-rest-operator"><a href="#展開運算子-spread-operator-與-其餘運算子-rest-operator" class="headerlink" title="展開運算子 (spread operator) 與 其餘運算子 (rest operator)"></a>展開運算子 (spread operator) 與 其餘運算子 (rest operator)</h3><p>展開運算子與其餘運算子的寫法都是 <code>...</code>，但應用的地方不同先來看看展開運算子</p>
+<h4 id="展開運算子-spread-operator"><a href="#展開運算子-spread-operator" class="headerlink" title="展開運算子 (spread operator)"></a>展開運算子 (spread operator)</h4><p>展開運算子的作用是展開一個陣列當中的值，而這種特性可以幫助我們在開發上可以更方便</p>
+<h5 id="拆解陣列或字串"><a href="#拆解陣列或字串" class="headerlink" title="拆解陣列或字串"></a>拆解陣列或字串</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line"><span class="built_in">console</span>.log(...arr); <span class="comment">// 1, 2, 3</span></span><br></pre></td></tr></table></figure>
+
+<p>我們也可以把一個字串拆解開來</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> str = <span class="string">"hello world"</span>;</span><br><span class="line"><span class="built_in">console</span>.log(...str); <span class="comment">// h e l l o   w o r l d</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="陣列的合併"><a href="#陣列的合併" class="headerlink" title="陣列的合併"></a>陣列的合併</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr1 = [<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>];</span><br><span class="line"><span class="keyword">let</span> arr2 = [<span class="string">'d'</span>, <span class="string">'e'</span>, <span class="string">'f'</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 舊的寫法</span></span><br><span class="line"><span class="keyword">let</span> group = arr1.concat(arr2);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 新的寫法</span></span><br><span class="line"><span class="keyword">let</span> newGroup = [...arr1, ...arr2];</span><br></pre></td></tr></table></figure>
+
+<h5 id="shallow-copy-淺複製"><a href="#shallow-copy-淺複製" class="headerlink" title="shallow copy 淺複製"></a>shallow copy 淺複製</h5><p>因為 JavaScript 的物件賦予到另外一個值上的時候，不會另外配置一塊新的記憶體，而是用傳參考的方式傳遞，因此可能會被別的操作而影響到自己本身的內容，例如</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> userData = &#123;</span><br><span class="line">  name: <span class="string">'BOB'</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> newUserData = userData;</span><br><span class="line">newUserData.name = <span class="string">'TOM'</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(userData.name); <span class="comment">// TOM</span></span><br><span class="line"><span class="built_in">console</span>.log(newUserData.name); <span class="comment">// TOM</span></span><br></pre></td></tr></table></figure>
+
+<p>而我們可以利用 <code>Object.assign</code> 或是 <code>...</code> 展開運算子做淺複製，這樣就能保證針對複製過後的內容作操作不會影響到原始物件的內容。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> userData = &#123;</span><br><span class="line">  name: <span class="string">'BOB'</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> newUserData = <span class="built_in">Object</span>.assign(userData);</span><br><span class="line">newUserData.name = <span class="string">'TOM'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> newUserData1 = &#123; ...userData &#125;;</span><br><span class="line">newUserData1.name = <span class="string">'LARRY'</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(userData.name); <span class="comment">// BOB</span></span><br><span class="line"><span class="built_in">console</span>.log(newUserData.name); <span class="comment">// TOM</span></span><br><span class="line"><span class="built_in">console</span>.log(newUserData1.name); <span class="comment">// LARRY</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="其餘運算子-rest-operator"><a href="#其餘運算子-rest-operator" class="headerlink" title="其餘運算子 (rest operator)"></a>其餘運算子 (rest operator)</h4><p>其餘運算子雖然寫法跟展開運算子一樣，但是情境是使用在<strong>把 function 當中的參數變成陣列的形式</strong>，比方說</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum</span>(<span class="params">...arg: number[]</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> sum = <span class="number">0</span>;</span><br><span class="line">  arg.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">item</span>) </span>&#123;</span><br><span class="line">    sum += item;</span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="built_in">console</span>.log(sum); <span class="comment">// 15</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">sum(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>);</span><br></pre></td></tr></table></figure>
+
+<p>或者也可以接收不一樣的參數並且轉成陣列，比方說</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">...arg: [number, boolean]</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(arg[<span class="number">0</span>]); <span class="comment">// 10</span></span><br><span class="line">  <span class="built_in">console</span>.log(arg[<span class="number">1</span>]); <span class="comment">// false</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">foo(<span class="number">10</span>, <span class="literal">false</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="解構賦值"><a href="#解構賦值" class="headerlink" title="解構賦值"></a>解構賦值</h3><p>解構賦值的特色在於把右邊的值鏡射到左邊的變數上，而我們可以針對陣列或物件做解構賦值。</p>
+<h4 id="陣列解構賦值"><a href="#陣列解構賦值" class="headerlink" title="陣列解構賦值"></a>陣列解構賦值</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> skill = [<span class="string">'HTML'</span>, <span class="string">'CSS'</span>, <span class="string">'JavaScript'</span>];</span><br><span class="line"><span class="keyword">const</span> [skill1, skill2, skill3] = skill;</span><br><span class="line"><span class="built_in">console</span>.log(skill1, skill2, skill3);</span><br></pre></td></tr></table></figure>
+
+<h4 id="物件解構賦值"><a href="#物件解構賦值" class="headerlink" title="物件解構賦值"></a>物件解構賦值</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> userData = &#123;</span><br><span class="line">  name: <span class="string">'BOB'</span>,</span><br><span class="line">  height: <span class="number">170</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> &#123; <span class="attr">name</span>: newName, <span class="attr">height</span>: newHeight &#125; = userData; </span><br><span class="line"><span class="built_in">console</span>.log(newName, newHeight);</span><br></pre></td></tr></table></figure>
+
+<h3 id="template-literal-模版字符串"><a href="#template-literal-模版字符串" class="headerlink" title="template literal 模版字符串"></a>template literal 模版字符串</h3><p>在過去 ES5 的時代，假如我們想要組多行的字串的話，要使用 斷行符號 <code>\n</code> 和 <code>+</code> 號把字串組起來，像以下範例。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> content = <span class="string">'&lt;div&gt;\n'</span> + </span><br><span class="line">                  <span class="string">'&lt;header&gt;header&lt;/header&gt;\n'</span> + </span><br><span class="line">                  <span class="string">'&lt;main&gt;main&lt;/main&gt;\n'</span> +</span><br><span class="line">                <span class="string">"&lt;/div&gt;"</span>;</span><br><span class="line"><span class="built_in">console</span>.log(content);</span><br></pre></td></tr></table></figure>
+
+<p>但若是改成 template literal 寫法就簡單很多</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> content = <span class="string">`</span></span><br><span class="line"><span class="string">                  &lt;div&gt;</span></span><br><span class="line"><span class="string">                    &lt;header&gt;header&lt;/header&gt;</span></span><br><span class="line"><span class="string">                    &lt;main&gt;main&lt;/main&gt;</span></span><br><span class="line"><span class="string">                  &lt;/div&gt;</span></span><br><span class="line"><span class="string">                `</span></span><br><span class="line"><span class="built_in">console</span>.log(content);</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+    <div class="post__footer">
+        <div id="disqus_thread"></div>
+            <script>
+                /**
+                *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+                /*
+                var disqus_config = function () {
+                this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+                this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                };
+                */
+                (function() { // DON'T EDIT BELOW THIS LINE
+                var d = document, s = d.createElement('script');
+                s.src = 'https://it-blog-6.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+                })();
+                </script>
+                <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>                   
+        </div>
+</article>
+        </div>
+        
+      </div>
+    </div>
+    <div class="footer">
+        © 2019. All rights reserved.
+      </div>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.9/highlight.min.js"></script>
+  <script>
+      hljs.initHighlightingOnLoad();
+  </script>
+</body>
+</html>
