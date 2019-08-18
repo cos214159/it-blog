@@ -7,7 +7,7 @@ tags:
 categories: 前端
 ---
 
-TypeScript 在 ES6 提供的 class 語法提供了很多物件導向的特性，比方說私有公有變數、繼承、抽象類別的特性，讓我們可以更好的去導入設計樣式的概念。
+TypeScript 提供比 ES6 的 class 語法更多物件導向的特性，比方說私有公有變數、繼承、抽象類別的特性，讓我們可以更好的去導入設計樣式的概念。
 
 我們來看一個例子，比方說我們建立一個個人的基本資料類別
 
@@ -124,7 +124,61 @@ const person = new Person("James", "A123456789", 12);
 person.name = 'Jason'
 
 ```
+## 靜態方法 (Static method) 和 靜態變數 (Static properties)
+如果把變數或方法宣告成靜態的話, 我們可以在不把 class new 出來的情形下使用該變數或方法
 
+``` JavaScript
+class Circle {
+    static PI: number = 3.14;
+    static circumference(diameter: number): number {
+        return this.PI * diameter
+    }
+}
+console.log(Circle.PI, Circle.circumference(8))
+```
 
+## 抽象類別
 
+抽象類別與一般的類別最大的差別是他本身並不能被實體化, 只能依賴繼承他的類別進行實體化, 而在抽象類別裡面, 我們可以定義抽象方法, 在繼承的類別中必須要實作他, 如以下範例 `Shape` 使用 `abstract` 關鍵字定義表示他為一個抽象類別, 所以不能夠執行這一行 `const shape = new Shape()` 不然會出錯, 而在繼承的類別中必須實作 `draw` 這個方法
 
+``` JavaScript
+abstract class Shape {
+    _type: string;
+
+    abstract draw(): void 
+    constructor(type: string) {
+        this._type = type
+    }
+}
+
+class Rectangle extends Shape {
+    constructor(type: string) {
+        super(type)
+    }
+    draw() {
+        console.log('我是正方形')
+    }
+}
+
+const rectangle = new Rectangle('正方形')
+rectangle.draw()
+
+```
+
+## 唯讀欄位 (readonly)
+唯獨欄位性質有一點像 `const` 在 class 的建構式內只要賦予值之後, 就不能再針對這個欄位進行修改, 只能讀取
+
+``` JavaScript
+class Person {
+    readonly _name: string;
+
+    constructor(name: string) {
+        this._name = name
+    }
+}
+
+const person = new Person("Jason")
+console.log(person._name)
+person._name = 'Bob' // Cannot assign to '_name' because it is a read-only property.
+
+```
