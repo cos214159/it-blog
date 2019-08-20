@@ -159,3 +159,96 @@ function sayHello(person: Person) {
 
 sayHello({ name: 'Jason', sex: 'male' }); // 通過
 ```
+
+## 對方法進行檢查
+如果定義的物件沒有符合 interface 的欄位，那在編譯時會出錯｀
+``` JavaScript
+interface Person {
+    firstName: string;
+    height?: number;
+    [propName: string]: any;
+    greet(lastName: string): void;
+}
+
+const person: Person = {
+    firstName: 'Jason',
+    height: 170,
+    greet(lastName: string) {
+        console.log('Hello ' + this.firstName + ' ' + lastName);
+    }
+}
+
+function sayHello(person: Person) {
+    console.log(person.name + ' Hello');
+}
+
+sayHello(person)
+```
+
+## 實作 implements
+這個有點像 C 或 java, 可以使用 class 去實作一個介面
+
+``` JavaScript
+interface Person {
+    firstName: string;
+    height?: number;
+    [propName: string]: any;
+    greet(lastName: string): void;
+}
+
+class Teacher implements Person {
+    firstName: string;
+    
+    constructor(firstName: string) {
+        this.firstName = firstName;
+    }
+
+    greet(lastName: string) {
+        console.log(lastName)
+    }
+}
+
+```
+
+## 用於 function type
+這個作法在於定義一個 function 的介面, 會於編譯時檢查 function 的參數和回傳值是否有跟這個介面是一樣的
+
+``` JavaScript
+interface Sum {
+    (number1: number, number2: number): number
+}
+
+const sum: Sum = function(number1, number2) {
+    return number1 + number2
+}
+
+console.log(sum(10, 30))
+
+```
+
+## interface inheritance
+
+介面繼承就是當宣告一個 interface 時可以藉由繼承去擴充或複寫該介面定義的欄位以及方法
+
+``` JavaScript
+
+interface Shape {
+    width: number;
+    height: number;
+}
+
+interface Circle extends Shape {
+    diameter: number
+}
+
+const shape: Shape = {
+    width: 100,
+    height: 100
+}
+
+const circle: Circle = {
+    width: 100,
+    height: 100,
+    diameter: 10
+}
+```
