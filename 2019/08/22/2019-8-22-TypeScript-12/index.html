@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.9/styles/a11y-dark.min.css">
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<!--Title-->
+
+
+<title>TypeScript 系列筆記 (十二) - 泛型 | IT 技術文章</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="IT 技術文章" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.ico">
+
+<link rel="stylesheet" href="../../../../css/style.css">
+</head>
+<body>
+  <div id="wrap" class="wrap">
+    <div class="header">
+  <div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white ">
+      <a class="navbar-brand" href="../../../../index.html">IT 技術筆記</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    
+    </nav>
+  </div>
+    
+  <!-- <h1 class="header__logo">
+    <a href="../../../../index.html">IT 技術筆記</a>
+  </h1>
+  <ul class="header__list">
+    <li class="header__list__item">123</li>
+    <li class="header__list__item">456</li>
+    <li class="header__list__item">789</li>
+  </ul> -->
+</div>
+    <div class="container content">
+      <div class="row justify-content-center">
+        <div class="col-md-8  col-md-10 ">
+          <article class="post">
+    <h1 class="post__head">
+        <div class="post__head__title">TypeScript 系列筆記 (十二) - 泛型</div>
+        <div class="post-meta">
+    <div class="post-meta__tags">
+        
+            <a class="tag-link" href="../../../../tags/JavaScript/">JavaScript</a> <a class="tag-link" href="../../../../tags/TypeScript/">TypeScript</a>
+        
+    </div>
+    <span class="post-meta__tags">
+        建立日期 : 2019/08/22
+    </span>
+</div>
+    </h1>
+    <div class="post__body">
+        <p>如果是在寫 JavaScript 的話，基本上是不需要泛型的，然而因為 TypeScript 是強型別的關係，在編譯階段會需要檢查型別，有一些情形就顯得沒有動態型別這麼方便，比方說</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">identity</span>(<span class="params">arg: number</span>): <span class="title">number</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> arg;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">identity(<span class="number">10</span>);</span><br></pre></td></tr></table></figure>
+
+<p>在以上範例我們會希望傳入的參數與回傳值的型別是一樣的，但是上面的 function 在定義時已經限制了型別為 <code>number</code>，如果要支援其他型別的傳遞，就會需要重複宣告很多次重複的 function，比如說</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">identity1</span>(<span class="params">arg: string</span>): <span class="title">string</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> arg;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">identity2</span>(<span class="params">arg: boolean</span>): <span class="title">boolean</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> arg;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>這樣當然就會非常不方便，那當然最方便的做法就是將傳入值以及回傳值都宣告成 <code>any</code>，而這個也是一個泛型，但是這樣的話就不能保證回傳值一定跟傳入的值的型別是一致的</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">identity</span>(<span class="params">arg: any</span>): <span class="title">any</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> arg;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>這個時候就可以使用泛型 (generic)</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">identity</span>&lt;<span class="title">T</span>&gt;(<span class="params">data: T</span>): <span class="title">T</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> data</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">identity(<span class="number">20</span>)</span><br><span class="line">identity(<span class="string">'Alice'</span>).length</span><br><span class="line">identity&lt;boolean&gt;(<span class="literal">false</span>)</span><br></pre></td></tr></table></figure>
+
+<p>泛型的寫法在於使用這個記號 <code>&lt;T&gt;</code>，裡面的 T 是一個型別的代號，這個例子就是根據傳入的值，T 會自動帶入該值的型別，所以如果傳入數字，那 T 就會被替換成 <code>number</code>，如果傳入字串那 T 就會被替換成 <code>string</code>，而上面的例子，其中 <code>identity&lt;boolean&gt;(false)</code>，也可以自己去指定泛型的型別</p>
+<p>這種作法還有一個好處就是可以針對傳入的型別去做檢查，如果指定型別是數字但傳入的是字串，這樣編譯時會發生錯誤，而如果傳入的型別是數字，會沒有 <code>length</code> 這個屬性，這個錯誤也會檢查出來。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">identity&lt;number&gt;(<span class="string">'Bob'</span>); <span class="comment">// 錯誤</span></span><br><span class="line">identity&lt;number&gt;(<span class="number">50</span>).length <span class="comment">// 錯誤</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="陣列泛型"><a href="#陣列泛型" class="headerlink" title="陣列泛型"></a>陣列泛型</h2><p>陣列泛型主要是可以接受一個型別，而這個型別會規範這個陣列所有的元素型別，如以下範例如果 push 一個字串進去的話，那編譯時會出錯。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> arr:<span class="built_in">Array</span>&lt;number&gt; = [<span class="number">1.2</span>, <span class="number">2.3</span>]</span><br><span class="line">arr.push(<span class="number">10</span>);</span><br><span class="line">arr.push(<span class="string">'Hello'</span>); <span class="comment">// 錯誤</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="function-中定義泛型陣列"><a href="#function-中定義泛型陣列" class="headerlink" title="function 中定義泛型陣列"></a>function 中定義泛型陣列</h2><p>在 宣告 function 時如同前面的範例，我們可以定義一個泛型，然後我們可以用這個型別去定義陣列參數，如果不符合定義的規範，在檢查時會出錯。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">printData</span>&lt;<span class="title">T</span>&gt;(<span class="params">arr: T[]</span>) </span>&#123;</span><br><span class="line">  arr.forEach(<span class="function"><span class="params">item</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(item)</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">printData&lt;number&gt;([<span class="string">"Alice"</span>, <span class="number">123</span>]);</span><br></pre></td></tr></table></figure>
+
+<h2 id="generic-type"><a href="#generic-type" class="headerlink" title="generic type"></a>generic type</h2><p>這種泛型型別可以應用的很廣泛，如以下範例在定義變數時，將該變數規範成 <code>&lt;T&gt;(data: T) =&gt; T</code> 這樣的型別</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">printData</span>&lt;<span class="title">T</span>&gt;(<span class="params">arr: T[]</span>) </span>&#123;</span><br><span class="line">  arr.forEach(<span class="function"><span class="params">item</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(item)</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> foo: <span class="xml"><span class="tag">&lt;<span class="name">T</span>&gt;</span>(data: T) =&gt; T = identity</span></span><br><span class="line"><span class="xml">console.log(foo('Hello'))</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="generic-class"><a href="#generic-class" class="headerlink" title="generic class"></a>generic class</h2><p>我們也可以在定義類別時加上泛型</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MathHelper</span> </span>&#123;</span><br><span class="line">  _number1: number;</span><br><span class="line">  _number2: number;</span><br><span class="line">  <span class="keyword">constructor</span>(number1, number2) &#123;</span><br><span class="line">    <span class="keyword">this</span>._number1 = number1;</span><br><span class="line">    <span class="keyword">this</span>._number2 = number2;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  sum() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>._number1 + <span class="keyword">this</span>._number2;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果是這個例子，當我們在定義該類別時會必須在每個變數加上型別檢查，但若是變數想要可以動態綁定數字或字串的話，就可以加上泛型定義</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MathHelper</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">  _number1: T;</span><br><span class="line">  _number2: T;</span><br><span class="line">  <span class="keyword">constructor</span>(number1: T, number2: T) &#123;</span><br><span class="line">    <span class="keyword">this</span>._number1 = number1;</span><br><span class="line">    <span class="keyword">this</span>._number2 = number2;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  sum(): number &#123;</span><br><span class="line">    <span class="keyword">return</span> +<span class="keyword">this</span>._number1 + +<span class="keyword">this</span>._number2;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Generic-Constraints"><a href="#Generic-Constraints" class="headerlink" title="Generic Constraints"></a>Generic Constraints</h3><p>在泛型中我們可以使用 <code>extends</code> 關鍵字讓型別限縮在 extend 的型別下，比如說像上面例子</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MathHelper</span>&lt;<span class="title">T</span> <span class="keyword">extends</span> <span class="title">number</span> | <span class="title">string</span>&gt; </span>&#123;</span><br><span class="line">  _number1: T;</span><br><span class="line">  _number2: T;</span><br><span class="line">  <span class="keyword">constructor</span>(number1: T, number2: T) &#123;</span><br><span class="line">    <span class="keyword">this</span>._number1 = number1;</span><br><span class="line">    <span class="keyword">this</span>._number2 = number2;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  sum(): number &#123;</span><br><span class="line">    <span class="keyword">return</span> +<span class="keyword">this</span>._number1 + +<span class="keyword">this</span>._number2;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> mathHelper = <span class="keyword">new</span> MathHelper&lt;number&gt;(<span class="number">10</span>, <span class="number">20</span>);</span><br><span class="line"><span class="keyword">const</span> booleanMathHelper = <span class="keyword">new</span> MathHelper&lt;boolean&gt;(<span class="literal">true</span>, <span class="literal">false</span>); <span class="comment">// 錯誤</span></span><br></pre></td></tr></table></figure>
+
+<p>可以讓 class 只接受數字和字串的型別，其餘的型別傳入的話 編譯時會出錯</p>
+<h3 id="宣告類別時，定義多種的-generic-type"><a href="#宣告類別時，定義多種的-generic-type" class="headerlink" title="宣告類別時，定義多種的 generic type"></a>宣告類別時，定義多種的 generic type</h3><p>如果我們想要在定義類別時，讓他可以接受數字以及字串的型別，那就可以使用多個泛型，如下所示，第一個泛型 <code>T</code> 接受數字或字串，第二個泛型 <code>U</code> 接受數字或字串，這樣宣告之後在變數上加上不同的泛型，在 new 出物件時參數給定就會比較彈性。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MathHelper</span>&lt;<span class="title">T</span> <span class="keyword">extends</span> <span class="title">number</span> | <span class="title">string</span>, <span class="title">U</span> <span class="keyword">extends</span> <span class="title">number</span> | <span class="title">string</span>&gt; </span>&#123;</span><br><span class="line">  _number1: T;</span><br><span class="line">  _number2: U;</span><br><span class="line">  <span class="keyword">constructor</span>(number1: T, number2: U) &#123;</span><br><span class="line">    <span class="keyword">this</span>._number1 = number1;</span><br><span class="line">    <span class="keyword">this</span>._number2 = number2;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  sum(): number &#123;</span><br><span class="line">    <span class="keyword">return</span> +<span class="keyword">this</span>._number1 + +<span class="keyword">this</span>._number2;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> mathHelper = <span class="keyword">new</span> MathHelper&lt;number, string&gt;(<span class="number">10</span>, <span class="string">"20"</span>);</span><br><span class="line"><span class="built_in">console</span>.log(mathHelper.sum());</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+    <div class="post__footer">
+        <div id="disqus_thread"></div>
+            <script>
+                /**
+                *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+                /*
+                var disqus_config = function () {
+                this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+                this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                };
+                */
+                (function() { // DON'T EDIT BELOW THIS LINE
+                var d = document, s = d.createElement('script');
+                s.src = 'https://it-blog-6.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+                })();
+                </script>
+                <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>                   
+        </div>
+</article>
+        </div>
+        
+      </div>
+    </div>
+    <div class="footer">
+        © 2019. All rights reserved.
+      </div>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.9/highlight.min.js"></script>
+  <script>
+      hljs.initHighlightingOnLoad();
+  </script>
+</body>
+</html>

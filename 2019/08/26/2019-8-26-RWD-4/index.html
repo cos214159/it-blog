@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.9/styles/a11y-dark.min.css">
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<!--Title-->
+
+
+<title>RWD 筆記 - 常見的 Layout 設定 | IT 技術文章</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="IT 技術文章" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.ico">
+
+<link rel="stylesheet" href="../../../../css/style.css">
+</head>
+<body>
+  <div id="wrap" class="wrap">
+    <div class="header">
+  <div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white ">
+      <a class="navbar-brand" href="../../../../index.html">IT 技術筆記</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    
+    </nav>
+  </div>
+    
+  <!-- <h1 class="header__logo">
+    <a href="../../../../index.html">IT 技術筆記</a>
+  </h1>
+  <ul class="header__list">
+    <li class="header__list__item">123</li>
+    <li class="header__list__item">456</li>
+    <li class="header__list__item">789</li>
+  </ul> -->
+</div>
+    <div class="container content">
+      <div class="row justify-content-center">
+        <div class="col-md-8  col-md-10 ">
+          <article class="post">
+    <h1 class="post__head">
+        <div class="post__head__title">RWD 筆記 - 常見的 Layout 設定</div>
+        <div class="post-meta">
+    <div class="post-meta__tags">
+        
+            <a class="tag-link" href="../../../../tags/CSS/">CSS</a> <a class="tag-link" href="../../../../tags/RWD/">RWD</a>
+        
+    </div>
+    <span class="post-meta__tags">
+        建立日期 : 2019/08/26
+    </span>
+</div>
+    </h1>
+    <div class="post__body">
+        <p>在響應式網頁有許多常見的 Layout，比如說</p>
+<h2 id="三欗式排版"><a href="#三欗式排版" class="headerlink" title="三欗式排版"></a>三欗式排版</h2><p>可以用 flex 去排版，也可以搭配響應式去偵測目前螢幕的尺寸，視情況要變成雙欗式或單欗式的排版</p>
+<h2 id="左側固定，右側浮動的版型"><a href="#左側固定，右側浮動的版型" class="headerlink" title="左側固定，右側浮動的版型"></a>左側固定，右側浮動的版型</h2><p>左側的寬度寫死，右側寫 % </p>
+<h2 id="禁止-X-軸出現"><a href="#禁止-X-軸出現" class="headerlink" title="禁止 X 軸出現"></a>禁止 X 軸出現</h2><p>通常響應式的 layout 為了在手機上有比較好的體驗，會特別排版讓 X 軸不能滑動<br>在響應式網頁出現之前，我們可以把寬度寫死，但是如果在手機上瀏覽時會需要左右移動就會顯得較不方便，而我們可以設定 <code>max-width: 100%</code>，當螢幕縮小時也會跟著自適應。</p>
+<p>100% 這個元素的內容會去以他的父元素的寬度為基準依比例算出該元素的寬度。</p>
+
+    </div>
+    <div class="post__footer">
+        <div id="disqus_thread"></div>
+            <script>
+                /**
+                *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+                /*
+                var disqus_config = function () {
+                this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+                this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                };
+                */
+                (function() { // DON'T EDIT BELOW THIS LINE
+                var d = document, s = d.createElement('script');
+                s.src = 'https://it-blog-6.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+                })();
+                </script>
+                <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>                   
+        </div>
+</article>
+        </div>
+        
+      </div>
+    </div>
+    <div class="footer">
+        © 2019. All rights reserved.
+      </div>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.9/highlight.min.js"></script>
+  <script>
+      hljs.initHighlightingOnLoad();
+  </script>
+</body>
+</html>

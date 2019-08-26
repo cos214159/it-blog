@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.9/styles/a11y-dark.min.css">
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<!--Title-->
+
+
+<title>TypeScript 系列筆記 (八) - class | IT 技術文章</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="IT 技術文章" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.ico">
+
+<link rel="stylesheet" href="../../../../css/style.css">
+</head>
+<body>
+  <div id="wrap" class="wrap">
+    <div class="header">
+  <div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white ">
+      <a class="navbar-brand" href="../../../../index.html">IT 技術筆記</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    
+    </nav>
+  </div>
+    
+  <!-- <h1 class="header__logo">
+    <a href="../../../../index.html">IT 技術筆記</a>
+  </h1>
+  <ul class="header__list">
+    <li class="header__list__item">123</li>
+    <li class="header__list__item">456</li>
+    <li class="header__list__item">789</li>
+  </ul> -->
+</div>
+    <div class="container content">
+      <div class="row justify-content-center">
+        <div class="col-md-8  col-md-10 ">
+          <article class="post">
+    <h1 class="post__head">
+        <div class="post__head__title">TypeScript 系列筆記 (八) - class</div>
+        <div class="post-meta">
+    <div class="post-meta__tags">
+        
+            <a class="tag-link" href="../../../../tags/JavaScript/">JavaScript</a> <a class="tag-link" href="../../../../tags/TypeScript/">TypeScript</a>
+        
+    </div>
+    <span class="post-meta__tags">
+        建立日期 : 2019/08/12
+    </span>
+</div>
+    </h1>
+    <div class="post__body">
+        <p>TypeScript 提供比 ES6 的 class 語法更多物件導向的特性，比方說私有公有變數、繼承、抽象類別的特性，讓我們可以更好的去導入設計樣式的概念。</p>
+<p>我們來看一個例子，比方說我們建立一個個人的基本資料類別</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">  _name: string;</span><br><span class="line">  private _id: string;</span><br><span class="line">  protected _age: number;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">constructor</span>(name: string, id: string, age: number) &#123;</span><br><span class="line">    <span class="keyword">this</span>._name = name;</span><br><span class="line">    <span class="keyword">this</span>._id = id;</span><br><span class="line">    <span class="keyword">this</span>._age = age;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  getName() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>._name</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  setName(name) &#123;</span><br><span class="line">    <span class="keyword">this</span>._name = name</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  protected getAge() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>._age</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  private getId() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>._id</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> person = <span class="keyword">new</span> Person(<span class="string">"JAMES"</span>, <span class="string">"A123456789"</span>, <span class="number">12</span>);</span><br></pre></td></tr></table></figure>
+
+<p>在這個範例裡面，一個人的基本資料有 <code>姓名</code>、<code>身分證</code>、<code>年齡</code>，宣告欄位的方法有三種，而除此之外也可以宣告私有以及公有方法，預設如果沒有特別指定，不管是變數或方法都是 public。</p>
+<ul>
+<li>public : 意思也就是在 class 外面也可以自由使用</li>
+<li>private : 只能在 class 內部使用</li>
+<li>protected : 跟 private 一樣，但是在繼承過後的 class 可以直接使用他</li>
+</ul>
+<h3 id="宣告變數的-style"><a href="#宣告變數的-style" class="headerlink" title="宣告變數的 style"></a>宣告變數的 style</h3><p>一個 class 內部的變數，在宣告時最前面最好加上一個下底線，單純只是為了區分外部變數和 class 內部的變數。</p>
+<p>以上述範例來說姓名是可以從外部直接使用的</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">person.name = <span class="string">'JAMES1'</span> <span class="comment">// 正確</span></span><br></pre></td></tr></table></figure>
+
+<p>但是 <code>id</code> 和 <code>age</code> 是沒有辦法透過物件直接存取</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(person.id); <span class="comment">// 錯誤</span></span><br><span class="line"><span class="built_in">console</span>.log(person.age); <span class="comment">// 錯誤</span></span><br></pre></td></tr></table></figure>
+
+<p>當然方法也是一樣，只有公有方法可以直接呼叫，其餘都要從內部呼叫才合法。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(person.getName()); <span class="comment">// 正確</span></span><br><span class="line"><span class="built_in">console</span>.log(person.getAge()); <span class="comment">// 錯誤</span></span><br><span class="line"><span class="built_in">console</span>.log(person.getId()); <span class="comment">// 錯誤</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="繼承"><a href="#繼承" class="headerlink" title="繼承"></a>繼承</h2><p>TypeScript 也有把繼承的特性加入，如果有寫過 C 或 Java 的話，對以下的程式結構應該不陌生，<code>Staff</code> 繼承了 <code>Person</code> 而繼承類別必須在建構式中呼叫 上一層的建構式，<code>super()</code>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Staff</span> <span class="keyword">extends</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(name: string) &#123;</span><br><span class="line">    <span class="keyword">super</span>(name, <span class="string">'Azyz'</span>, <span class="number">18</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> bob = <span class="keyword">new</span> Staff(<span class="string">"Bob"</span>)</span><br><span class="line"><span class="built_in">console</span>.log(bob)</span><br></pre></td></tr></table></figure>
+
+<p>在繼承類別中不可以取用父類別的私有變數，但是卻可以直接使用保護變數。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Staff</span> <span class="keyword">extends</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(name: string) &#123;</span><br><span class="line">    <span class="keyword">super</span>(name, <span class="string">'Azyz'</span>, <span class="number">18</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.id) <span class="comment">// Property 'id' is private and only accessible within class 'Person'.</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.age) <span class="comment">// 正確</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="使用-get-set"><a href="#使用-get-set" class="headerlink" title="使用 get, set"></a>使用 get, set</h2><p>在上面的範例針對 <code>name</code> 的操作，我們會增加 <code>getName</code> 和 <code>setName</code> 給外部呼叫，而還有另外的方式可以更方便的去撰寫這兩種函式</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">  _name: string;</span><br><span class="line">  private _id: string;</span><br><span class="line">  protected _age: number;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">constructor</span>(name: string, id: string, age: number) &#123;</span><br><span class="line">    <span class="keyword">this</span>._name = name;</span><br><span class="line">    <span class="keyword">this</span>._id = id;</span><br><span class="line">    <span class="keyword">this</span>._age = age;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">get</span> name() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>._name</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">set</span> name(name: string) &#123;</span><br><span class="line">    <span class="keyword">this</span>._name = name</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> person = <span class="keyword">new</span> Person(<span class="string">"James"</span>, <span class="string">"A123456789"</span>, <span class="number">12</span>);</span><br><span class="line">person.name = <span class="string">'Jason'</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="靜態方法-Static-method-和-靜態變數-Static-properties"><a href="#靜態方法-Static-method-和-靜態變數-Static-properties" class="headerlink" title="靜態方法 (Static method) 和 靜態變數 (Static properties)"></a>靜態方法 (Static method) 和 靜態變數 (Static properties)</h2><p>如果把變數或方法宣告成靜態的話, 我們可以在不把 class new 出來的情形下使用該變數或方法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Circle</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> PI: number = <span class="number">3.14</span>;</span><br><span class="line">    <span class="keyword">static</span> circumference(diameter: number): number &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.PI * diameter</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(Circle.PI, Circle.circumference(<span class="number">8</span>))</span><br></pre></td></tr></table></figure>
+
+<h2 id="抽象類別"><a href="#抽象類別" class="headerlink" title="抽象類別"></a>抽象類別</h2><p>抽象類別與一般的類別最大的差別是他本身並不能被實體化, 只能依賴繼承他的類別進行實體化, 而在抽象類別裡面, 我們可以定義抽象方法, 在繼承的類別中必須要實作他, 如以下範例 <code>Shape</code> 使用 <code>abstract</code> 關鍵字定義表示他為一個抽象類別, 所以不能夠執行這一行 <code>const shape = new Shape()</code> 不然會出錯, 而在繼承的類別中必須實作 <code>draw</code> 這個方法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">abstract <span class="class"><span class="keyword">class</span> <span class="title">Shape</span> </span>&#123;</span><br><span class="line">    _type: string;</span><br><span class="line"></span><br><span class="line">    abstract draw(): <span class="keyword">void</span> </span><br><span class="line">    <span class="keyword">constructor</span>(type: string) &#123;</span><br><span class="line">        <span class="keyword">this</span>._type = type</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Rectangle</span> <span class="keyword">extends</span> <span class="title">Shape</span> </span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(type: string) &#123;</span><br><span class="line">        <span class="keyword">super</span>(type)</span><br><span class="line">    &#125;</span><br><span class="line">    draw() &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'我是正方形'</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> rectangle = <span class="keyword">new</span> Rectangle(<span class="string">'正方形'</span>)</span><br><span class="line">rectangle.draw()</span><br></pre></td></tr></table></figure>
+
+<h2 id="唯讀欄位-readonly"><a href="#唯讀欄位-readonly" class="headerlink" title="唯讀欄位 (readonly)"></a>唯讀欄位 (readonly)</h2><p>唯獨欄位性質有一點像 <code>const</code> 在 class 的建構式內只要賦予值之後, 就不能再針對這個欄位進行修改, 只能讀取</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    readonly _name: string;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">constructor</span>(name: string) &#123;</span><br><span class="line">        <span class="keyword">this</span>._name = name</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> person = <span class="keyword">new</span> Person(<span class="string">"Jason"</span>)</span><br><span class="line"><span class="built_in">console</span>.log(person._name)</span><br><span class="line">person._name = <span class="string">'Bob'</span> <span class="comment">// Cannot assign to '_name' because it is a read-only property.</span></span><br></pre></td></tr></table></figure>
+    </div>
+    <div class="post__footer">
+        <div id="disqus_thread"></div>
+            <script>
+                /**
+                *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+                /*
+                var disqus_config = function () {
+                this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+                this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                };
+                */
+                (function() { // DON'T EDIT BELOW THIS LINE
+                var d = document, s = d.createElement('script');
+                s.src = 'https://it-blog-6.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+                })();
+                </script>
+                <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>                   
+        </div>
+</article>
+        </div>
+        
+      </div>
+    </div>
+    <div class="footer">
+        © 2019. All rights reserved.
+      </div>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.9/highlight.min.js"></script>
+  <script>
+      hljs.initHighlightingOnLoad();
+  </script>
+</body>
+</html>

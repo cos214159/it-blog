@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.9/styles/a11y-dark.min.css">
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<!--Title-->
+
+
+<title>HTML 筆記 - form | IT 技術文章</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="IT 技術文章" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.ico">
+
+<link rel="stylesheet" href="../../../../css/style.css">
+</head>
+<body>
+  <div id="wrap" class="wrap">
+    <div class="header">
+  <div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white ">
+      <a class="navbar-brand" href="../../../../index.html">IT 技術筆記</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    
+    </nav>
+  </div>
+    
+  <!-- <h1 class="header__logo">
+    <a href="../../../../index.html">IT 技術筆記</a>
+  </h1>
+  <ul class="header__list">
+    <li class="header__list__item">123</li>
+    <li class="header__list__item">456</li>
+    <li class="header__list__item">789</li>
+  </ul> -->
+</div>
+    <div class="container content">
+      <div class="row justify-content-center">
+        <div class="col-md-8  col-md-10 ">
+          <article class="post">
+    <h1 class="post__head">
+        <div class="post__head__title">HTML 筆記 - form</div>
+        <div class="post-meta">
+    <div class="post-meta__tags">
+        
+            <a class="tag-link" href="../../../../tags/HTML/">HTML</a>
+        
+    </div>
+    <span class="post-meta__tags">
+        建立日期 : 2019/08/25
+    </span>
+</div>
+    </h1>
+    <div class="post__body">
+        <p>假如我們想要在 HTML 上填寫一些資料，比如說註冊會員，這些資料會送到後端去處理並儲存在資料庫，在撰寫給使用者輸入的欄位時，我們會使用 <code>form</code> 包住 <code>input</code> 欄位，然後再送出，基本結構如下。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">""</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"name"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"email"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"submit"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>input 的型態很多，依據不同的形態在手機上會開啟不一樣的鍵盤</li>
+<li><code>&lt;input type=&quot;submit&quot;&gt;</code> 這個是一個按鈕，點擊之後會將使用者的資料送出</li>
+</ul>
+<h2 id="提示文字-placeholder"><a href="#提示文字-placeholder" class="headerlink" title="提示文字 placeholder"></a>提示文字 placeholder</h2><p>在輸入框上，我們會需要提示使用者一些文字，讓使用者可以很清楚的知道這個輸入框的性質，比如</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">"name"</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"name"</span> <span class="attr">placeholder</span>=<span class="string">"請輸入姓名"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="label"><a href="#label" class="headerlink" title="label"></a>label</h2><p>輸入框會需要一個對應的 label 註記這個輸入框的標籤，而 label 會有一個 for 的屬性對應到輸入框的 id，這個效果會讓使用者點擊到這個 label 時會自動聚焦到輸入框上，範例如下</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"name"</span>&gt;</span>姓名<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">"name"</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"name"</span> <span class="attr">placeholder</span>=<span class="string">"請輸入姓名"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="radio-單選"><a href="#radio-單選" class="headerlink" title="radio 單選"></a>radio 單選</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"radio"</span> <span class="attr">name</span>=<span class="string">"agree"</span> <span class="attr">value</span>=<span class="string">"yes"</span>&gt;</span> 同意 </span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"radio"</span> <span class="attr">name</span>=<span class="string">"agree"</span> <span class="attr">value</span>=<span class="string">"no"</span>&gt;</span> 不同意</span><br></pre></td></tr></table></figure>
+
+<h2 id="checkbox-複選"><a href="#checkbox-複選" class="headerlink" title="checkbox 複選"></a>checkbox 複選</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"checkbox"</span> <span class="attr">name</span>=<span class="string">"fav_food"</span> <span class="attr">value</span>=<span class="string">"noodle"</span>&gt;</span> 義大利麵</span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"checkbox"</span> <span class="attr">name</span>=<span class="string">"fav_food"</span> <span class="attr">value</span>=<span class="string">"rice"</span>&gt;</span> 咖哩飯</span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"checkbox"</span> <span class="attr">name</span>=<span class="string">"fav_food"</span> <span class="attr">value</span>=<span class="string">"soup"</span>&gt;</span> 雞湯</span><br></pre></td></tr></table></figure>
+
+<h2 id="select-下拉式選單"><a href="#select-下拉式選單" class="headerlink" title="select 下拉式選單"></a>select 下拉式選單</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">name</span>=<span class="string">"country"</span> <span class="attr">id</span>=<span class="string">"place"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">"taiwan"</span>&gt;</span>台灣<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">"America"</span>&gt;</span>美國<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">"Japan"</span>&gt;</span>日本<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="多行輸入模式"><a href="#多行輸入模式" class="headerlink" title="多行輸入模式"></a>多行輸入模式</h2><ul>
+<li>rows 指的是可以打幾行</li>
+<li>cols 指的是可以打幾個字元<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">textarea</span> <span class="attr">name</span>=<span class="string">"article"</span> <span class="attr">id</span>=<span class="string">""</span> <span class="attr">cols</span>=<span class="string">"30"</span> <span class="attr">rows</span>=<span class="string">"10"</span>&gt;</span><span class="tag">&lt;/<span class="name">textarea</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>此外可以去看看 <a href="https://purecss.io/" target="_blank" rel="noopener">pureCSS</a> 的樣式語法，因為我們再撰寫 表單時，可能會有蠻多瀏覽器的樣式要做統合，而這個 purecss 因為內容不像 bootstrap 有很多分離的檔案，可以讓我們更方便的去看他如何針對不同的瀏覽器去做兼容的。</p>
+<p><a href="https://codepen.io/cos214159/pen/OKVWjZ" target="_blank" rel="noopener">codepen 範例</a></p>
+
+    </div>
+    <div class="post__footer">
+        <div id="disqus_thread"></div>
+            <script>
+                /**
+                *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+                /*
+                var disqus_config = function () {
+                this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+                this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                };
+                */
+                (function() { // DON'T EDIT BELOW THIS LINE
+                var d = document, s = d.createElement('script');
+                s.src = 'https://it-blog-6.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+                })();
+                </script>
+                <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>                   
+        </div>
+</article>
+        </div>
+        
+      </div>
+    </div>
+    <div class="footer">
+        © 2019. All rights reserved.
+      </div>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.9/highlight.min.js"></script>
+  <script>
+      hljs.initHighlightingOnLoad();
+  </script>
+</body>
+</html>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.9/styles/a11y-dark.min.css">
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<!--Title-->
+
+
+<title>TypeScript 系列筆記 (十一) - interface | IT 技術文章</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="IT 技術文章" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.ico">
+
+<link rel="stylesheet" href="../../../../css/style.css">
+</head>
+<body>
+  <div id="wrap" class="wrap">
+    <div class="header">
+  <div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white ">
+      <a class="navbar-brand" href="../../../../index.html">IT 技術筆記</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    
+    </nav>
+  </div>
+    
+  <!-- <h1 class="header__logo">
+    <a href="../../../../index.html">IT 技術筆記</a>
+  </h1>
+  <ul class="header__list">
+    <li class="header__list__item">123</li>
+    <li class="header__list__item">456</li>
+    <li class="header__list__item">789</li>
+  </ul> -->
+</div>
+    <div class="container content">
+      <div class="row justify-content-center">
+        <div class="col-md-8  col-md-10 ">
+          <article class="post">
+    <h1 class="post__head">
+        <div class="post__head__title">TypeScript 系列筆記 (十一) - interface</div>
+        <div class="post-meta">
+    <div class="post-meta__tags">
+        
+            <a class="tag-link" href="../../../../tags/JavaScript/">JavaScript</a> <a class="tag-link" href="../../../../tags/TypeScript/">TypeScript</a>
+        
+    </div>
+    <span class="post-meta__tags">
+        建立日期 : 2019/08/19
+    </span>
+</div>
+    </h1>
+    <div class="post__body">
+        <p>TypeScript 的 interface 跟物件導向的 interface 有點雷同，也比之前所介紹到的 type 功能更多。</p>
+<p>物件導向的 interface 在於定義一組尚未實作的方法，並實作他，而 TypeScript 的介面來看一下他是怎麼一回事</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sayHello</span>(<span class="params">person: &#123; name: string &#125;</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(person.name + <span class="string">' Hello'</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> person = &#123;</span><br><span class="line">  name: <span class="string">'Jason'</span>,</span><br><span class="line">  height: <span class="number">180</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">sayHello(person);</span><br></pre></td></tr></table></figure>
+
+<p>假設說在上面的範例中，呼叫 <code>sayHello</code> 時傳入的物件，在編譯時會檢查是否有 name 這一個 key 值，如果沒有編譯會出錯。</p>
+<p>而之前有介紹到的 type 在於可以將這個檢查的型別抽出來共用，像下面這個範例</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">type Person = &#123;</span><br><span class="line">  name: string</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sayHello</span>(<span class="params">person: Person</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(person.name + <span class="string">' Hello'</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">setName</span>(<span class="params">person: Person</span>) </span>&#123;</span><br><span class="line">  person.name = <span class="string">'Alice'</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> person = &#123;</span><br><span class="line">  name: <span class="string">'Jason'</span>,</span><br><span class="line">  height: <span class="number">180</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">sayHello(person);</span><br><span class="line">setName(person);</span><br></pre></td></tr></table></figure>
+
+<p>除此之外 TypeScript 還有提供 interface 的功能，可以做到一樣的事情，這樣寫的話一樣是會在呼叫 function 時檢查傳入的參數是否有跟介面定義的內容相符合。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">interface Person &#123;</span><br><span class="line">  name: string</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sayHello</span>(<span class="params">person: Person</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(person.name + <span class="string">' Hello'</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">setName</span>(<span class="params">person: Person</span>) </span>&#123;</span><br><span class="line">  person.name = <span class="string">'Alice'</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> person = &#123;</span><br><span class="line">  name: <span class="string">'Jason'</span>,</span><br><span class="line">  height: <span class="number">180</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">sayHello(person);</span><br></pre></td></tr></table></figure>
+
+<p>而介面有幾個用法</p>
+<h2 id="檢查傳入的參數內容"><a href="#檢查傳入的參數內容" class="headerlink" title="檢查傳入的參數內容"></a>檢查傳入的參數內容</h2><p>根據傳入參數的方式，TypeScript 會做不一樣的檢查</p>
+<h3 id="先定義物件傳入"><a href="#先定義物件傳入" class="headerlink" title="先定義物件傳入"></a>先定義物件傳入</h3><p>這種檢查會比較沒有那麼嚴格，在預先定義的物件當中，有多了 <code>height</code> 這個屬性，而這個屬性並沒有定義在 介面中，當以這種方式將物件傳入，編譯時並不會特別檢查出 height 沒有定義在介面中。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">interface Person &#123;</span><br><span class="line">  name: string</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sayHello</span>(<span class="params">person: Person</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(person.name + <span class="string">' Hello'</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> person = &#123;</span><br><span class="line">  name: <span class="string">'Jason'</span>,</span><br><span class="line">  height: <span class="number">180</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">sayHello(&#123; <span class="attr">name</span>: <span class="string">'Jason'</span>&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="直接傳入物件"><a href="#直接傳入物件" class="headerlink" title="直接傳入物件"></a>直接傳入物件</h3><p>用這種方式傳入物件，在編譯時會去檢查傳入的物件中所有的屬性是否跟介面定義的一致，如果沒有的話就會出錯</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">interface Person &#123;</span><br><span class="line">  name: string</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sayHello</span>(<span class="params">person: Person</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(person.name + <span class="string">' Hello'</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">sayHello(&#123; <span class="attr">name</span>: <span class="string">'Jason'</span>, <span class="attr">height</span>: <span class="number">180</span>&#125;); <span class="comment">// Object literal may only specify known properties, and 'height' does not exist in type 'Person</span></span><br></pre></td></tr></table></figure>
+
+<p>那假如說我們想要直接傳入物件又想要通過檢查的話</p>
+<p>第一種當然就是在 interface 多定義 height 這個屬性</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">interface Person &#123;</span><br><span class="line">  name: string,</span><br><span class="line">  height: number</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sayHello</span>(<span class="params">person: Person</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(person.name + <span class="string">' Hello'</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">sayHello(&#123; <span class="attr">name</span>: <span class="string">'Jason'</span>, <span class="attr">height</span>: <span class="number">180</span> &#125;);</span><br></pre></td></tr></table></figure>
+
+<p>但是這樣寫就會是每次傳入物件時都一定要多帶 height 這個屬性，那 TypeScript 有給我們這個彈性是可傳可不傳，就只要在屬性旁邊加上一個 <code>?</code> 就好</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">interface Person &#123;</span><br><span class="line">  name: string,</span><br><span class="line">  height?: number</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sayHello</span>(<span class="params">person: Person</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(person.name + <span class="string">' Hello'</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">sayHello(&#123; <span class="attr">name</span>: <span class="string">'Jason'</span> &#125;); <span class="comment">// 通過</span></span><br></pre></td></tr></table></figure>
+
+<p>那如果一開始並不知道資料的屬性欄位，那有一個額外的功能是可以定義一個變數，可以接受任意的屬性 <code>[propName: string]: any</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">interface Person &#123;</span><br><span class="line">  name: string,</span><br><span class="line">  height?: number,</span><br><span class="line">  [propName: string]: any</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sayHello</span>(<span class="params">person: Person</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(person.name + <span class="string">' Hello'</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">sayHello(&#123; <span class="attr">name</span>: <span class="string">'Jason'</span>, <span class="attr">sex</span>: <span class="string">'male'</span> &#125;); <span class="comment">// 通過</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="對方法進行檢查"><a href="#對方法進行檢查" class="headerlink" title="對方法進行檢查"></a>對方法進行檢查</h2><p>如果定義的物件沒有符合 interface 的欄位，那在編譯時會出錯｀</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">interface Person &#123;</span><br><span class="line">    firstName: string;</span><br><span class="line">    height?: number;</span><br><span class="line">    [propName: string]: any;</span><br><span class="line">    greet(lastName: string): <span class="keyword">void</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> person: Person = &#123;</span><br><span class="line">    firstName: <span class="string">'Jason'</span>,</span><br><span class="line">    height: <span class="number">170</span>,</span><br><span class="line">    greet(lastName: string) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'Hello '</span> + <span class="keyword">this</span>.firstName + <span class="string">' '</span> + lastName);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sayHello</span>(<span class="params">person: Person</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(person.name + <span class="string">' Hello'</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">sayHello(person)</span><br></pre></td></tr></table></figure>
+
+<h2 id="實作-implements"><a href="#實作-implements" class="headerlink" title="實作 implements"></a>實作 implements</h2><p>這個有點像 C 或 java, 可以使用 class 去實作一個介面</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">interface Person &#123;</span><br><span class="line">    firstName: string;</span><br><span class="line">    height?: number;</span><br><span class="line">    [propName: string]: any;</span><br><span class="line">    greet(lastName: string): <span class="keyword">void</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Teacher</span> <span class="title">implements</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    firstName: string;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">constructor</span>(firstName: string) &#123;</span><br><span class="line">        <span class="keyword">this</span>.firstName = firstName;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    greet(lastName: string) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(lastName)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="用於-function-type"><a href="#用於-function-type" class="headerlink" title="用於 function type"></a>用於 function type</h2><p>這個作法在於定義一個 function 的介面, 會於編譯時檢查 function 的參數和回傳值是否有跟這個介面是一樣的</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">interface Sum &#123;</span><br><span class="line">    (number1: number, <span class="attr">number2</span>: number): number</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> sum: Sum = <span class="function"><span class="keyword">function</span>(<span class="params">number1, number2</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> number1 + number2</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(sum(<span class="number">10</span>, <span class="number">30</span>))</span><br></pre></td></tr></table></figure>
+
+<h2 id="interface-inheritance"><a href="#interface-inheritance" class="headerlink" title="interface inheritance"></a>interface inheritance</h2><p>介面繼承就是當宣告一個 interface 時可以藉由繼承去擴充或複寫該介面定義的欄位以及方法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">interface Shape &#123;</span><br><span class="line">    width: number;</span><br><span class="line">    height: number;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">interface Circle extends Shape &#123;</span><br><span class="line">    diameter: number</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> shape: Shape = &#123;</span><br><span class="line">    width: <span class="number">100</span>,</span><br><span class="line">    height: <span class="number">100</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> circle: Circle = &#123;</span><br><span class="line">    width: <span class="number">100</span>,</span><br><span class="line">    height: <span class="number">100</span>,</span><br><span class="line">    diameter: <span class="number">10</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    </div>
+    <div class="post__footer">
+        <div id="disqus_thread"></div>
+            <script>
+                /**
+                *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+                /*
+                var disqus_config = function () {
+                this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+                this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                };
+                */
+                (function() { // DON'T EDIT BELOW THIS LINE
+                var d = document, s = d.createElement('script');
+                s.src = 'https://it-blog-6.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+                })();
+                </script>
+                <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>                   
+        </div>
+</article>
+        </div>
+        
+      </div>
+    </div>
+    <div class="footer">
+        © 2019. All rights reserved.
+      </div>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.9/highlight.min.js"></script>
+  <script>
+      hljs.initHighlightingOnLoad();
+  </script>
+</body>
+</html>

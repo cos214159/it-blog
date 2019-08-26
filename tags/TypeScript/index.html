@@ -58,7 +58,7 @@
       <li class="post-list__item">
         <div class="card">
           <div class="card-header bg-white">
-            <a class="card__title text-decoration-none" href="../../2019/08/11/2019-8-11-TypeScript-7/">TypeScript 系列筆記 (七) - TypeScript 和 ES6</a>
+            <a class="card__title text-decoration-none" href="../../2019/08/24/2019-8-24-TypeScript-13/">TypeScript 系列筆記 (十三) - 常用的 TypeScript 設定</a>
             <div class="post-meta">
     <div class="post-meta__tags">
         
@@ -66,14 +66,16 @@
         
     </div>
     <span class="post-meta__tags">
-        建立日期 : 2019/08/11
+        建立日期 : 2019/08/24
     </span>
 </div>
           </div>
           <div class="card-body">
             <div class="card-body__content">
-                TypeScript 可以讓我們撰寫強型別的變數並且在編譯階段檢查型別是否正確，而 TypeScript 因為是 ES6 的超級 (superset)，他也可以幫我們編譯 ES6 的語法。
-ES6 語法let &amp;amp; const在...
+                在編譯 TypeScript 檔案的時候我們可以使用以下指令去做編譯
+1tsc
+
+但是這個方法在編譯之後假如檔案發生改變還要再運行一次這個指令，那麼可以使用一個 -woption 這樣就會持續的去監聽這個檔案，發生改變時自動進行編譯。...
             </div>
           </div>
         </div>
@@ -82,7 +84,7 @@ ES6 語法let &amp;amp; const在...
       <li class="post-list__item">
         <div class="card">
           <div class="card-header bg-white">
-            <a class="card__title text-decoration-none" href="../../2019/08/09/2019-8-9-TypeScript-6/">TypeScript 系列筆記 (六) - 自訂 Type</a>
+            <a class="card__title text-decoration-none" href="../../2019/08/22/2019-8-22-TypeScript-12/">TypeScript 系列筆記 (十二) - 泛型</a>
             <div class="post-meta">
     <div class="post-meta__tags">
         
@@ -90,14 +92,14 @@ ES6 語法let &amp;amp; const在...
         
     </div>
     <span class="post-meta__tags">
-        建立日期 : 2019/08/09
+        建立日期 : 2019/08/22
     </span>
 </div>
           </div>
           <div class="card-body">
             <div class="card-body__content">
-                我們已經知道在定義物件的時候可以加上屬性型別，如果是比較複雜的型別結構
-1234567let person: &amp;#123; name: string, height: number, hello: (name: string) =&amp;g...
+                如果是在寫 JavaScript 的話，基本上是不需要泛型的，然而因為 TypeScript 是強型別的關係，在編譯階段會需要檢查型別，有一些情形就顯得沒有動態型別這麼方便，比方說
+12345function identity(arg...
             </div>
           </div>
         </div>
@@ -106,7 +108,7 @@ ES6 語法let &amp;amp; const在...
       <li class="post-list__item">
         <div class="card">
           <div class="card-header bg-white">
-            <a class="card__title text-decoration-none" href="../../2019/08/09/2019-8-9-TypeScript-5/">TypeScript 系列筆記 (五) - TypeScript 的 Object 型別</a>
+            <a class="card__title text-decoration-none" href="../../2019/08/19/2019-8-19-TypeScript-11/">TypeScript 系列筆記 (十一) - interface</a>
             <div class="post-meta">
     <div class="post-meta__tags">
         
@@ -114,13 +116,14 @@ ES6 語法let &amp;amp; const在...
         
     </div>
     <span class="post-meta__tags">
-        建立日期 : 2019/08/09
+        建立日期 : 2019/08/19
     </span>
 </div>
           </div>
           <div class="card-body">
             <div class="card-body__content">
-                在 TypeScript 定義 Object 時，一開始所指派的物件，後來在指派值的時候，是只能指派同樣的物件結構，比方說在一開始我們將 data assign 一個物件，之後只能在 assign 一個同樣結構的物件，像以下我們指派一...
+                TypeScript 的 interface 跟物件導向的 interface 有點雷同，也比之前所介紹到的 type 功能更多。
+物件導向的 interface 在於定義一組尚未實作的方法，並實作他，而 TypeScript 的介面...
             </div>
           </div>
         </div>
@@ -129,7 +132,7 @@ ES6 語法let &amp;amp; const在...
       <li class="post-list__item">
         <div class="card">
           <div class="card-header bg-white">
-            <a class="card__title text-decoration-none" href="../../2019/08/09/2019-8-9-TypeScript-4/">TypeScript 系列筆記 (四) - TypeScript 的 function 型別</a>
+            <a class="card__title text-decoration-none" href="../../2019/08/18/2019-8-18-TypeScript-10/">TypeScript 系列筆記 (十) - module</a>
             <div class="post-meta">
     <div class="post-meta__tags">
         
@@ -137,15 +140,16 @@ ES6 語法let &amp;amp; const在...
         
     </div>
     <span class="post-meta__tags">
-        建立日期 : 2019/08/09
+        建立日期 : 2019/08/18
     </span>
 </div>
           </div>
           <div class="card-body">
             <div class="card-body__content">
-                呼叫 function 時，可以使用 TypeScript 幫我們限制傳入的參數型別，以及回傳值的型別。
-限制回傳的型別比如說像這樣的寫法，就是強制回傳的時候一定要回傳字串
-12345function hello(): string ...
+                module 的使用方式跟 ES6 的 import export 差不多，但是要在瀏覽器上運行的話會需要額外的 module loader，
+比如以下作法
+circle.js
+123456export const PI = 3.14...
             </div>
           </div>
         </div>
@@ -154,7 +158,7 @@ ES6 語法let &amp;amp; const在...
       <li class="post-list__item">
         <div class="card">
           <div class="card-header bg-white">
-            <a class="card__title text-decoration-none" href="../../2019/08/06/2019-8-6-TypeScript-3/">TypeScript 系列筆記 (三) - TypeScript 各種型別</a>
+            <a class="card__title text-decoration-none" href="../../2019/08/18/2019-8-18-TypeScript-9/">TypeScript 系列筆記 (九) - namespace</a>
             <div class="post-meta">
     <div class="post-meta__tags">
         
@@ -162,13 +166,14 @@ ES6 語法let &amp;amp; const在...
         
     </div>
     <span class="post-meta__tags">
-        建立日期 : 2019/08/06
+        建立日期 : 2019/08/18
     </span>
 </div>
           </div>
           <div class="card-body">
             <div class="card-body__content">
-                那麼可以來進入到 TypeScript 的撰寫方式了，回顧一下之前講的，TypeScript 會出現是因為 JavaScript 的動態型別，我們不希望在指定一個整數給變數之後，又可以將字串指派給該變數，TypeScript 可以在編...
+                namespace 命名空間跟 C# 是一樣的概念，我們可以把一些相關的函式放在這個命名空間裡面，避免與其他的函式命名有所衝突。
+12345678910111213141516namespace MathHelper &amp;#123;  ...
             </div>
           </div>
         </div>
@@ -179,7 +184,7 @@ ES6 語法let &amp;amp; const在...
 
   <nav id="page-nav">
     
-    <span class="page-number current">1</span><a class="page-number" href="page/2/">2</a><a class="extend next" rel="next" href="page/2/"> &raquo;</a>
+    <span class="page-number current">1</span><a class="page-number" href="page/2/">2</a><a class="page-number" href="page/3/">3</a><a class="extend next" rel="next" href="page/2/"> &raquo;</a>
   </nav>
 
         </div>
@@ -190,7 +195,7 @@ ES6 語法let &amp;amp; const在...
       
   <div class="widget">
       <h3 class="title">目錄</h3>
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="../../categories/前端/">前端</a><span class="category-list-count">7</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="../../categories/前端/">前端</a><span class="category-list-count">46</span></li></ul>
   </div>
 
 
@@ -198,7 +203,7 @@ ES6 語法let &amp;amp; const在...
       
 <div class="widget">
     <h3 class="title">文章</h3>
-    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2019/08/">2019年08月</a><span class="archive-list-count">7</span></li></ul>
+    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2019/08/">2019年08月</a><span class="archive-list-count">46</span></li></ul>
 </div>
 
 
@@ -208,7 +213,7 @@ ES6 語法let &amp;amp; const在...
     <h3 class="title">標籤列表</h3>
     <div class="content tag-cloud">
         
-            <a href="../JavaScript/" style="font-size: 10px;">JavaScript</a> <a href style="font-size: 10px;">TypeScript</a>
+            <a href="../CSS/" style="font-size: 20px;">CSS</a> <a href="../HTML/" style="font-size: 12.5px;">HTML</a> <a href="../JavaScript/" style="font-size: 17.5px;">JavaScript</a> <a href="../RWD/" style="font-size: 15px;">RWD</a> <a href style="font-size: 17.5px;">TypeScript</a> <a href="../yarn/" style="font-size: 10px;">yarn</a>
         
     </div>
   </div>

@@ -58,7 +58,7 @@
       <li class="post-list__item">
         <div class="card">
           <div class="card-header bg-white">
-            <a class="card__title text-decoration-none" href="../../../../2019/08/06/2019-8-6-TypeScript-2/">TypeScript 系列筆記 (二) - TypeScript 基本環境</a>
+            <a class="card__title text-decoration-none" href="../../../../2019/08/12/2019-8-12-TypeScript-8/">TypeScript 系列筆記 (八) - class</a>
             <div class="post-meta">
     <div class="post-meta__tags">
         
@@ -66,15 +66,15 @@
         
     </div>
     <span class="post-meta__tags">
-        建立日期 : 2019/08/06
+        建立日期 : 2019/08/12
     </span>
 </div>
           </div>
           <div class="card-body">
             <div class="card-body__content">
-                因為 TypeScript 並不能運行在瀏覽器上，我們必須要安裝相對應的工具來進行編譯，我們可以使用 NPM 來安裝。
-安裝 TypeScript首先先使用 NPM 將 TypeScript 編譯工具安裝到全域環境下
-1npm ins...
+                TypeScript 提供比 ES6 的 class 語法更多物件導向的特性，比方說私有公有變數、繼承、抽象類別的特性，讓我們可以更好的去導入設計樣式的概念。
+我們來看一個例子，比方說我們建立一個個人的基本資料類別
+123456789...
             </div>
           </div>
         </div>
@@ -83,7 +83,7 @@
       <li class="post-list__item">
         <div class="card">
           <div class="card-header bg-white">
-            <a class="card__title text-decoration-none" href="../../../../2019/08/04/2019-8-4-TypeScript-1/">TypeScript 系列筆記 (一) - 什麼是 TypeScript</a>
+            <a class="card__title text-decoration-none" href="../../../../2019/08/11/2019-8-11-TypeScript-7/">TypeScript 系列筆記 (七) - TypeScript 和 ES6</a>
             <div class="post-meta">
     <div class="post-meta__tags">
         
@@ -91,13 +91,86 @@
         
     </div>
     <span class="post-meta__tags">
-        建立日期 : 2019/08/04
+        建立日期 : 2019/08/11
     </span>
 </div>
           </div>
           <div class="card-body">
             <div class="card-body__content">
-                我們都知道 JavaScript 是一個腳本語言，最初是運行在瀏覽器上，可以能動態更新畫面內容，讓使用者可以和畫面有更多的互動，但是因為一開始 JavaScript 撰寫的時間不是很長，在後來的新版本 ES6 有解決了一些問題，比方說...
+                TypeScript 可以讓我們撰寫強型別的變數並且在編譯階段檢查型別是否正確，而 TypeScript 因為是 ES6 的超級 (superset)，他也可以幫我們編譯 ES6 的語法。
+ES6 語法let &amp;amp; const在...
+            </div>
+          </div>
+        </div>
+      </li>
+    
+      <li class="post-list__item">
+        <div class="card">
+          <div class="card-header bg-white">
+            <a class="card__title text-decoration-none" href="../../../../2019/08/09/2019-8-9-TypeScript-6/">TypeScript 系列筆記 (六) - 自訂 Type</a>
+            <div class="post-meta">
+    <div class="post-meta__tags">
+        
+            <a class="tag-link" href="../../../JavaScript/">JavaScript</a> <a class="tag-link" href="../../">TypeScript</a>
+        
+    </div>
+    <span class="post-meta__tags">
+        建立日期 : 2019/08/09
+    </span>
+</div>
+          </div>
+          <div class="card-body">
+            <div class="card-body__content">
+                我們已經知道在定義物件的時候可以加上屬性型別，如果是比較複雜的型別結構
+1234567let person: &amp;#123; name: string, height: number, hello: (name: string) =&amp;g...
+            </div>
+          </div>
+        </div>
+      </li>
+    
+      <li class="post-list__item">
+        <div class="card">
+          <div class="card-header bg-white">
+            <a class="card__title text-decoration-none" href="../../../../2019/08/09/2019-8-9-TypeScript-5/">TypeScript 系列筆記 (五) - TypeScript 的 Object 型別</a>
+            <div class="post-meta">
+    <div class="post-meta__tags">
+        
+            <a class="tag-link" href="../../../JavaScript/">JavaScript</a> <a class="tag-link" href="../../">TypeScript</a>
+        
+    </div>
+    <span class="post-meta__tags">
+        建立日期 : 2019/08/09
+    </span>
+</div>
+          </div>
+          <div class="card-body">
+            <div class="card-body__content">
+                在 TypeScript 定義 Object 時，一開始所指派的物件，後來在指派值的時候，是只能指派同樣的物件結構，比方說在一開始我們將 data assign 一個物件，之後只能在 assign 一個同樣結構的物件，像以下我們指派一...
+            </div>
+          </div>
+        </div>
+      </li>
+    
+      <li class="post-list__item">
+        <div class="card">
+          <div class="card-header bg-white">
+            <a class="card__title text-decoration-none" href="../../../../2019/08/09/2019-8-9-TypeScript-4/">TypeScript 系列筆記 (四) - TypeScript 的 function 型別</a>
+            <div class="post-meta">
+    <div class="post-meta__tags">
+        
+            <a class="tag-link" href="../../../JavaScript/">JavaScript</a> <a class="tag-link" href="../../">TypeScript</a>
+        
+    </div>
+    <span class="post-meta__tags">
+        建立日期 : 2019/08/09
+    </span>
+</div>
+          </div>
+          <div class="card-body">
+            <div class="card-body__content">
+                呼叫 function 時，可以使用 TypeScript 幫我們限制傳入的參數型別，以及回傳值的型別。
+限制回傳的型別比如說像這樣的寫法，就是強制回傳的時候一定要回傳字串
+12345function hello(): string ...
             </div>
           </div>
         </div>
@@ -108,7 +181,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="../../">&laquo; </a><a class="page-number" href="../../">1</a><span class="page-number current">2</span>
+    <a class="extend prev" rel="prev" href="../../">&laquo; </a><a class="page-number" href="../../">1</a><span class="page-number current">2</span><a class="page-number" href="../3/">3</a><a class="extend next" rel="next" href="../3/"> &raquo;</a>
   </nav>
 
         </div>
@@ -119,7 +192,7 @@
       
   <div class="widget">
       <h3 class="title">目錄</h3>
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/前端/">前端</a><span class="category-list-count">7</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/前端/">前端</a><span class="category-list-count">46</span></li></ul>
   </div>
 
 
@@ -127,7 +200,7 @@
       
 <div class="widget">
     <h3 class="title">文章</h3>
-    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../../../../archives/2019/08/">2019年08月</a><span class="archive-list-count">7</span></li></ul>
+    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../../../../archives/2019/08/">2019年08月</a><span class="archive-list-count">46</span></li></ul>
 </div>
 
 
@@ -137,7 +210,7 @@
     <h3 class="title">標籤列表</h3>
     <div class="content tag-cloud">
         
-            <a href="../../../JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="../../" style="font-size: 10px;">TypeScript</a>
+            <a href="../../../CSS/" style="font-size: 20px;">CSS</a> <a href="../../../HTML/" style="font-size: 12.5px;">HTML</a> <a href="../../../JavaScript/" style="font-size: 17.5px;">JavaScript</a> <a href="../../../RWD/" style="font-size: 15px;">RWD</a> <a href="../../" style="font-size: 17.5px;">TypeScript</a> <a href="../../../yarn/" style="font-size: 10px;">yarn</a>
         
     </div>
   </div>
