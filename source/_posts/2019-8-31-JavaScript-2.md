@@ -25,4 +25,19 @@ foo1();
 console.log(name);
 ```
 
+## 執行環境以及執行堆疊
+當 JavaScript 程式運行起來的時候會先行產生一個執行環境，在這個執行環境裡面會有一個全域物件和 this, 如果運行在瀏覽器上，這個執行環境會是 **window**, 而如果運行在 node.js 上這個執行環境會是 **global**, 除此之外還會有一個 **this** , 而當 function 被呼叫時, 會產生一個執行環境堆疊在全域執行環境之上, 這個就稱為**執行堆疊**  
+
+比方說以下列程式來講, 他的堆疊順序為 全域環境 -> foo1() -> foo2()  等到 function 執行結束之後, 會再依序把 foo2 和 foo1 從執行堆疊中移除
+
+``` JavaScript
+function foo2() {
+    var number2 = 20;
+}
+function foo1() {
+    var number1 = 10;
+    foo2();
+}
+foo1();
+```
 
