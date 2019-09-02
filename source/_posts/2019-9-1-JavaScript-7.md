@@ -1,0 +1,39 @@
+---
+title: JavaScript 筆記 - promise、async await
+date:  2019-09-01 22:44:26
+tags: 
+  - JavaScript
+categories: 前端
+---
+
+在講 promise 之前先來看一下什麼叫做回調地獄 (callback hell)
+
+## 回調地獄 (callback hell)
+假如說今天我們要做很多事情，比方說洗澡後煮飯，煮飯後洗衣服，洗衣服後吃飯，以程式來說可能會寫成以下這樣，這樣的寫法很充分利用了 JavaScript function 一等公民的做法，將 function 當作參數傳入 function 可以讓 function 內部進行調用，但缺點就是當我們要實作的功能很多時，會導致程式過於巢狀。
+
+``` JavaScript
+let runProcess = function(callback) {
+  callback();
+}
+
+runProcess(() => {
+  console.log('洗澡')
+  runProcess(() => {
+    console.log('煮飯')
+    runProcess(() => {
+      console.log('洗衣服');
+      runProcess(() => {
+        console.log('吃飯');
+      })
+    })
+  })
+})
+```
+
+而要解決上述的巢狀結構問題，就可以使用 promise
+
+## promise
+promise 為 ES6 提供用來解決非同步的解決方案，而其概念如下
+
+
+

@@ -3,7 +3,6 @@ title: JavaScript 筆記 - scope chain 範圍鍊
 date:  2019-09-01 10:38:23
 tags: 
   - JavaScript
-  - CSS
 categories: 前端
 ---
 
