@@ -33,7 +33,42 @@ runProcess(() => {
 而要解決上述的巢狀結構問題，就可以使用 promise
 
 ## promise
-promise 為 ES6 提供用來解決非同步的解決方案，而其概念如下
+promise 為 ES6 提供用來解決非同步的解決方案
 
+一個 promise 會處於以下幾種狀態 : 
 
+擱置（pending）：初始狀態，不是 fulfilled 與 rejected。
+實現（fulfilled）：表示操作成功地完成。
+拒絕（rejected）：表示操作失敗了。
+
+promise 成功可以調用 `resolve` 回傳成功錯誤訊息，失敗的話可以調用 `reject` 
+
+而成功的訊息可以使用 then 去接，失敗可則用 catch 去接
+
+上面的函式基於 promise 可以改成這樣
+
+``` JavaScript
+let runProcess = function(message, status) {
+  return new Promise((resolve, reject) => {
+    if (status === true) {
+      resolve(message + ' 成功');
+    } else {
+      reject(message + '失敗');
+    }
+  })
+}
+
+runProcess('洗澡', true).then((message) => {
+  console.log(message);
+  return runProcess('煮飯', true)
+}).then((message) => {
+  console.log(message);
+  return runProcess('洗衣服', true)
+}).then((message) => {
+  console.log(message);
+  return runProcess('吃飯', false)
+}).catch((message) => {
+  console.log(message);
+})
+```
 
