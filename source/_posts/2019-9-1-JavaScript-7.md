@@ -72,3 +72,5 @@ runProcess('洗澡', true).then((message) => {
 })
 ```
 
+## Macrotasks 和 Microtasks
+JavaScript 是單執行緒, 如果有非同步的程式碼 JavaScript 會把這些工作加到 queue 裡面, 而依據不同的 api 可以細分為兩種不同的 工作, Macrotasks 和 Microtasks, 可以細分為以下的兩個部分
