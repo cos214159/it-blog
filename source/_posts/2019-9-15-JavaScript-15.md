@@ -16,6 +16,8 @@ console.log(undefined && 5); // undefined
 console.log(0 && 5); // 0
 console.log(5 && undefined); // undefined
 console.log(1 && 10); // 10
+console.log(1 || 0); // 0
+console.log(1 && 2 && 0); // 0
 ```
 
 ## ||

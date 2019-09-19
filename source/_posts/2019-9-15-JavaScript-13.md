@@ -70,6 +70,7 @@ console.log(null == 0); // false
 ``` JavaScript
 console.log([10] == 10)
 console.log(['B'] == 'B')
+console.log(5 == new Number(5))
 ```
 
 而如果是以下範例
